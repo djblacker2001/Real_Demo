@@ -1,0 +1,4 @@
+3 tang
+tang 1 goi api => trả dữ liệu
+tang 2 service => logic
+tang 3 => UI
