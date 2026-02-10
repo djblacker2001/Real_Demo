@@ -1,15 +1,16 @@
 .sidebar {
-  width: 220px;
-  background: #0f172a;
-  color: white;
+    width: 220px;
+    background: #0f172a;
+    color: white;
 }
 
 .sidebar li {
-  padding: 15px;
-  cursor: pointer;
+    list-style-type: none;
+    padding: 15px;
+    cursor: pointer;
 }
 
 .sidebar li:hover,
 .sidebar li.active {
-  background: #1e293b;
+    background: #1e293b;
 }
