@@ -1,9 +1,11 @@
 import "./Footer.css";
 
 const Footer: React.FC = () => {
+  const currentYear: number = new Date().getFullYear();
+
   return (
     <footer className="footer">
-      © 2026 MyAdmin. All rights reserved.
+      &copy; {currentYear} MyAdmin. All rights reserved.
     </footer>
   );
 };

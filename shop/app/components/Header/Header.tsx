@@ -1,3 +1,5 @@
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Header.css";
 
 const Header: React.FC = () => {
@@ -8,7 +10,7 @@ const Header: React.FC = () => {
             <input className="search" placeholder="Search..." />
 
             <div className="user">
-                <img src="https://i.pravatar.cc/40" />
+                <FontAwesomeIcon icon={faUser} />
                 <span>Admin</span>
             </div>
         </header>

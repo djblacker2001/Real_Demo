@@ -1,16 +1,44 @@
 .sidebar {
-    width: 220px;
-    background: #0f172a;
-    color: white;
+  width: 240px;
+  min-height: 100vh;
+  background-color: #A78656;
+  color: white;
+  padding-top: 20px;
 }
 
-.sidebar li {
-    list-style-type: none;
-    padding: 15px;
-    cursor: pointer;
+.logo {
+  padding: 0 20px 20px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
-.sidebar li:hover,
-.sidebar li.active {
-    background: #1e293b;
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  width: 100%;
+}
+
+/* 🔥 CỐT LÕI */
+.menu-item {
+  display: block;          /* QUAN TRỌNG */
+  width: 100%;             /* QUAN TRỌNG */
+  padding: 14px 20px;
+  color: white;
+  text-decoration: none;
+  transition: background 0.25s;
+}
+
+/* Hover full chiều ngang */
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Active */
+.menu-item.active {
+  background: rgba(255, 255, 255, 0.12);
+  font-weight: 600;
 }

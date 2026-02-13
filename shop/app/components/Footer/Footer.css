@@ -1,19 +1,7 @@
-.header {
-  height: 60px;
-  background: #1e293b;
-  color: white;
+.footer {
+  height: 40px;
+  background: #e5e7eb;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-}
-
-.search {
-  padding: 6px;
-}
-
-.user {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  justify-content: center;
 }
