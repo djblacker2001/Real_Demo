@@ -8,12 +8,12 @@ import { useState, useEffect } from "react";
 const Sidebar = () => {
   const pathname = usePathname();
   type Category = {
-  slug: string;
-  name: string;
-  url: string;
-};
+    slug: string;
+    name: string;
+    url: string;
+  };
 
-const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
 
 
   useEffect(() => {
@@ -26,21 +26,19 @@ const [categories, setCategories] = useState<Category[]>([]);
     <aside className="sidebar">
       <h2 className="logo">Shop</h2>
       <ul className="menu">
-        {categories.map((cat) => (
-          <li key={cat.slug}>
-            <Link
-              href={`/products/${cat.slug}`}
-              className="menu-item"
-            >
-              {cat.name}
-            </Link>
-            <button className="LogOut">Log out</button>
-          </li>
-        ))}
+        <li>
+          <Link
+            href="/products"
+            className="menu-item"
+          >
+            Product
+          </Link>
+        </li>
+        <button className="LogOut">Log out</button>
       </ul>
-
-
       
+
+
     </aside>
   );
 };
