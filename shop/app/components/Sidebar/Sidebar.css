@@ -39,9 +39,8 @@
 }
 
 /* Active */
-.menu-item.active {
+.menu-item:active {
   background: rgba(255, 255, 255, 0.12);
-  font-weight: 600;
 }
 
 .LogOut {

@@ -14,6 +14,11 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.addBtn:hover {
+  background-color: #1c4bb2;
 }
 
 .table {
@@ -41,6 +46,11 @@
   border-radius: 4px;
   margin-right: 6px;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.editBtn:hover {
+  background-color: #bd7b09;
 }
 
 .deleteBtn {
@@ -50,6 +60,11 @@
   padding: 6px 10px;
   border-radius: 4px;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.deleteBtn:hover {
+  background-color: #ac1e1e;
 }
 
 .modalOverlay {
