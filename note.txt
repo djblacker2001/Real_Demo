@@ -5,3 +5,7 @@ tang 3 => UI
 
 API
 https://dummyjson.com/products
+
+menu bao gồm
+1 category
+1 mục products (Bao gồm các sản phẩm mỗi ô gồm có hình, tên và giá)
