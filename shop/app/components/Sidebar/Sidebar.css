@@ -1,6 +1,7 @@
 .sidebar {
+  position: relative;
   width: 240px;
-  min-height: 100vh;
+  min-height: 200vh;
   background-color: #A78656;
   color: white;
   padding-top: 20px;
@@ -41,4 +42,20 @@
 .menu-item.active {
   background: rgba(255, 255, 255, 0.12);
   font-weight: 600;
+}
+
+.LogOut {
+  background-color: #A78656;
+  padding: 14px 20px;
+  position: absolute;
+  width: 100%;
+  bottom: 10px;
+  border: none;
+  cursor: pointer;
+  color: aliceblue;
+  font-size: 20px;
+}
+
+.LogOut:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
