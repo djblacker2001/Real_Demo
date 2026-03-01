@@ -27,12 +27,21 @@ const Sidebar = () => {
       <h2 className="logo">Shop</h2>
       <ul className="menu">
         <li>
+          <Link href="/dashboard"
+            className="menu-item">
+            Dashboard
+          </Link>
+          <Link href="/listProducts"
+            className="menu-item">
+            List of Products
+          </Link>
           <Link
             href="/products"
             className="menu-item"
           >
-            Product
+            Products
           </Link>
+          
         </li>
         <button className="LogOut">Log out</button>
       </ul>

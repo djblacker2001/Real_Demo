@@ -108,6 +108,11 @@
   padding: 6px 12px;
   border-radius: 4px;
   cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.saveBtn:hover {
+  background: #107a37;
 }
 
 .cancelBtn {
@@ -117,6 +122,11 @@
   padding: 6px 12px;
   border-radius: 4px;
   cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.cancelBtn:hover {
+  background-color: #4b5058;
 }
 
 .pagination {
