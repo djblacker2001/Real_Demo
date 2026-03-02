@@ -1,0 +1,41 @@
+.detail-container {
+    padding: 40px;
+}
+
+.detail-wrapper {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.detail-image {
+    flex: 1;
+    min-width: 300px;
+}
+
+.detail-image img {
+    width: 100%;
+    border-radius: 12px;
+}
+
+.detail-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.detail-brand {
+    font-size: 16px;
+    color: gray;
+}
+
+.detail-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff4d4f;
+    margin: 10px 0;
+}
+
+.detail-description {
+    margin-top: 15px;
+    line-height: 1.6;
+}
