@@ -6,6 +6,7 @@ import "./style.css";
 import { useRouter } from "next/navigation";
 
 const { Search } = Input;
+const { Meta } = Card;
 
 type Product = {
   id: number;
@@ -18,7 +19,7 @@ type Product = {
 };
 
 export default function ProductList() {
-    const router = useRouter();
+  const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
@@ -28,8 +29,7 @@ export default function ProductList() {
 
   useEffect(() => {
     fetch(
-      `https://dummyjson.com/products/search?q=${searchText}&limit=${pageSize}&skip=${
-        (page - 1) * pageSize
+      `https://dummyjson.com/products/search?q=${searchText}&limit=${pageSize}&skip=${(page - 1) * pageSize
       }`
     )
       .then((res) => res.json())
@@ -57,20 +57,23 @@ export default function ProductList() {
           <Col xs={24} sm={12} md={8} lg={6} key={item.id}>
             <Card
               hoverable
+              style={{ width: '100%' }}
               cover={
-                <img
-                  alt={item.title}
-                  src={item.thumbnail}
-                  className="product-image"
-                />
+                <div className="product-image-container">
+                  <img
+                    alt={item.title}
+                    src={item.thumbnail}
+                    className="product-image"
+                  />
+                </div>
               }
               onClick={() => router.push(`/listProducts/${item.id}`)}
             >
-              <h3>{item.title}</h3>
-              <p><b>Brand:</b> {item.brand}</p>
-              <p><b>Category:</b> {item.category}</p>
-              <p><b>Price:</b> ${item.price}</p>
-              <p><b>Stock:</b> {item.stock}</p>
+              <div className="product-details">
+                <h3>{item.title}</h3>
+                <p><b>Brand:</b> {item.brand}</p>
+                <p><b>Price:</b> ${item.price}</p>
+              </div>
             </Card>
           </Col>
         ))}

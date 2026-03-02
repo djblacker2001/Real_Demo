@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "./page.module.css";
+import "./style.css";
+import { Input, Pagination } from "antd";
+
+const { Search } = Input;
 
 type Product = {
   id: number;
@@ -14,11 +17,13 @@ type Product = {
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [searchText, setSearchText] = useState("");
+  const pageSize = 10;
+
   const [isOpen, setIsOpen] = useState(false);
   const [editing, setEditing] = useState<Product | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalProducts, setTotalProducts] = useState(0);
-  const pageSize = 10;
 
   const [formData, setFormData] = useState<Product>({
     id: 0,
@@ -29,21 +34,18 @@ export default function ProductsPage() {
     stock: 0,
   });
 
-  // 🔹 Load toàn bộ sản phẩm
+  // 🔹 Fetch API (search + pagination)
   useEffect(() => {
-    console.log("Current Page:", currentPage);
-
     fetch(
-      `https://dummyjson.com/products?limit=${pageSize}&skip=${(currentPage - 1) * pageSize
+      `https://dummyjson.com/products/search?q=${searchText}&limit=${pageSize}&skip=${(currentPage - 1) * pageSize
       }`
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log("Fetched:", data.products.length);
         setProducts(data.products);
-        setTotalProducts(data.total);
+        setTotal(data.total);
       });
-  }, [currentPage]);
+  }, [currentPage, searchText]);
 
   const openAdd = () => {
     setEditing(null);
@@ -87,17 +89,25 @@ export default function ProductsPage() {
     setIsOpen(false);
   };
 
-  const totalPages = Math.ceil(totalProducts / pageSize);
-
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>PRODUCT MANAGEMENT</h1>
+    <div className="container">
+      <h1 className="title">PRODUCT MANAGEMENT</h1>
 
-      <button className={styles.addBtn} onClick={openAdd}>
+      <Search
+        placeholder="Search products..."
+        enterButton
+        onSearch={(value) => {
+          setCurrentPage(1);
+          setSearchText(value);
+        }}
+        style={{ marginBottom: 20, width: 300 }}
+      />
+
+      <button className="addBtn" onClick={openAdd}>
         + Thêm sản phẩm
       </button>
 
-      <table className={styles.table}>
+      <table className="table">
         <thead>
           <tr>
             <th>ID</th>
@@ -120,14 +130,11 @@ export default function ProductsPage() {
               <td>${p.price}</td>
               <td>{p.stock}</td>
               <td>
-                <button
-                  className={styles.editBtn}
-                  onClick={() => openEdit(p)}
-                >
+                <button className="editBtn" onClick={() => openEdit(p)}>
                   Sửa
                 </button>
                 <button
-                  className={styles.deleteBtn}
+                  className="deleteBtn"
                   onClick={() => handleDelete(p.id)}
                 >
                   Xóa
@@ -137,82 +144,25 @@ export default function ProductsPage() {
           ))}
         </tbody>
       </table>
-      <div className={styles.pagination}>
-        <button
-          disabled={currentPage === 1}
-          onClick={() => setCurrentPage((prev) => prev - 1)}
-        >
-          Prev
-        </button>
 
-        {(() => {
-          const pages = [];
-          const maxVisible = 3; // số trang hiển thị giữa
-          const totalPages = Math.ceil(totalProducts / pageSize);
-
-          let start = Math.max(1, currentPage - 1);
-          let end = Math.min(totalPages, currentPage + 1);
-
-          if (currentPage === 1) {
-            end = Math.min(totalPages, maxVisible);
-          }
-
-          if (currentPage === totalPages) {
-            start = Math.max(1, totalPages - maxVisible + 1);
-          }
-
-          if (start > 1) {
-            pages.push(
-              <button key={1} onClick={() => setCurrentPage(1)}>
-                1
-              </button>
-            );
-            if (start > 2) pages.push(<span key="start-ellipsis">...</span>);
-          }
-
-          for (let i = start; i <= end; i++) {
-            pages.push(
-              <button
-                key={i}
-                className={currentPage === i ? styles.activePage : ""}
-                onClick={() => setCurrentPage(i)}
-              >
-                {i}
-              </button>
-            );
-          }
-
-          if (end < totalPages) {
-            if (end < totalPages - 1)
-              pages.push(<span key="end-ellipsis">...</span>);
-            pages.push(
-              <button
-                key={totalPages}
-                onClick={() => setCurrentPage(totalPages)}
-              >
-                {totalPages}
-              </button>
-            );
-          }
-
-          return pages;
-        })()}
-
-        <button
-          disabled={currentPage === Math.ceil(totalProducts / pageSize)}
-          onClick={() => setCurrentPage((prev) => prev + 1)}
-        >
-          Next
-        </button>
-      </div>
+      <Pagination
+        className="pagination"
+        current={currentPage}
+        pageSize={pageSize}
+        total={total}
+        onChange={(page) => setCurrentPage(page)}
+        showSizeChanger={false}
+        showQuickJumper
+        showTotal={(total) => `Tổng ${total} sản phẩm`}
+      />
 
       {isOpen && (
-        <div className={styles.modalOverlay}>
-          <div className={styles.modal}>
+        <div className="modalOverlay">
+          <div className="modal">
             <h2>{editing ? "Sửa" : "Thêm"} sản phẩm</h2>
 
             <input
-              className={styles.input}
+              className="input"
               placeholder="Tên sản phẩm"
               value={formData.title}
               onChange={(e) =>
@@ -221,7 +171,7 @@ export default function ProductsPage() {
             />
 
             <input
-              className={styles.input}
+              className="input"
               placeholder="Brand"
               value={formData.brand}
               onChange={(e) =>
@@ -230,7 +180,7 @@ export default function ProductsPage() {
             />
 
             <input
-              className={styles.input}
+              className="input"
               placeholder="Category"
               value={formData.category}
               onChange={(e) =>
@@ -239,7 +189,7 @@ export default function ProductsPage() {
             />
 
             <input
-              className={styles.input}
+              className="input"
               type="number"
               placeholder="Giá"
               value={formData.price}
@@ -252,7 +202,7 @@ export default function ProductsPage() {
             />
 
             <input
-              className={styles.input}
+              className="input"
               type="number"
               placeholder="Stock"
               value={formData.stock}
@@ -264,12 +214,12 @@ export default function ProductsPage() {
               }
             />
 
-            <div className={styles.modalActions}>
-              <button className={styles.saveBtn} onClick={handleSave}>
+            <div className="modalActions">
+              <button className="saveBtn" onClick={handleSave}>
                 Lưu
               </button>
               <button
-                className={styles.cancelBtn}
+                className="cancelBtn"
                 onClick={() => setIsOpen(false)}
               >
                 Hủy

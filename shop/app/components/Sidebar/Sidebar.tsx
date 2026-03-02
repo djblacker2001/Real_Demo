@@ -1,54 +1,77 @@
-'use client';
+"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { MenuOutlined } from "@ant-design/icons";
 import "./Sidebar.css";
-import { useState, useEffect } from "react";
 
 const Sidebar = () => {
   const pathname = usePathname();
-  type Category = {
-    slug: string;
-    name: string;
-    url: string;
-  };
-
-  const [categories, setCategories] = useState<Category[]>([]);
-
-
-  useEffect(() => {
-    fetch("https://dummyjson.com/products/categories")
-      .then(res => res.json())
-      .then(data => setCategories(data));
-  }, []);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <aside className="sidebar">
-      <h2 className="logo">Shop</h2>
-      <ul className="menu">
-        <li>
-          <Link href="/dashboard"
-            className="menu-item">
-            Dashboard
-          </Link>
-          <Link href="/listProducts"
-            className="menu-item">
-            List of Products
-          </Link>
-          <Link
-            href="/products"
-            className="menu-item"
-          >
-            Products
-          </Link>
-          
-        </li>
-        <button className="LogOut">Log out</button>
-      </ul>
-      
+    <>
+      {/* ===== Mobile Header ===== */}
+      <div className="mobile-header">
+        <MenuOutlined
+          className="menu-icon"
+          onClick={() => setIsOpen(true)}
+        />
+      </div>
 
+      {/* ===== Overlay ===== */}
+      {isOpen && (
+        <div
+          className="overlay"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
 
-    </aside>
+      {/* ===== Sidebar ===== */}
+      <aside className={`sidebar ${isOpen ? "open" : ""}`}>
+        <h2 className="logo">Shop</h2>
+        <ul className="menu">
+          <li>
+            <Link
+              href="/dashboard"
+              className={`menu-item ${
+                pathname === "/dashboard" ? "active" : ""
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              Dashboard
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              href="/listProducts"
+              className={`menu-item ${
+                pathname === "/listProducts" ? "active" : ""
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              List of Products
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              href="/products"
+              className={`menu-item ${
+                pathname === "/products" ? "active" : ""
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              Products
+            </Link>
+          </li>
+        </ul>
+
+        <button className="logout">Log out</button>
+      </aside>
+    </>
   );
 };
 

@@ -1,28 +1,34 @@
 .header {
-  position: relative;
+  position: sticky;
+  top: 0;              /* QUAN TRỌNG */
+  z-index: 1000;
+
   height: 60px;
   background: #14416b;
   color: white;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   padding: 0 20px;
-  z-index: 1000;
 }
 
+/* Logo */
+.logo img {
+  height: 45px;
+  object-fit: contain;
+}
+
+/* Search */
 .search {
   padding: 6px;
 }
 
+/* User */
 .user {
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-img {
-  position: absolute;
-  width: 50px;
-  top: 5px;
-  left: 10px;
+  cursor: pointer;
 }

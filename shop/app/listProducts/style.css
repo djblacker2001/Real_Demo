@@ -17,11 +17,30 @@
   transform: translateY(-6px);
 }
 
-.product-image {
-  width: 100%;
+.product-image-container {
+  height: 200px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
 }
 
-/* Info */
+.product-image {
+  width: 200px;
+  object-fit: cover;
+  display: block;
+
+}
+
+.product-details {
+  padding: 10px 0;
+}
+
+.ant-card-body {
+  padding: 15px !important;
+}
+
 .product-info {
   padding: 12px;
   text-align: center;

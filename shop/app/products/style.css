@@ -1,13 +1,10 @@
-.container {
-  padding: 20px;
-}
-
 .title {
   font-size: 24px;
   margin-bottom: 20px;
 }
 
 .addBtn {
+  width: 200px;
   padding: 8px 14px;
   background: #2563eb;
   color: white;

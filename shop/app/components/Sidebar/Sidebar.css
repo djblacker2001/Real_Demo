@@ -1,18 +1,27 @@
+/* ============================= */
+/* ===== SIDEBAR DESKTOP ====== */
+/* ============================= */
+
 .sidebar {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 240px;
-  min-height: 200vh;
+  height: 100vh;
   background-color: #A78656;
   color: white;
   padding-top: 20px;
+  transition: transform 0.3s ease;
 }
 
+/* Logo */
 .logo {
   padding: 0 20px 20px;
   font-size: 20px;
   font-weight: bold;
 }
 
+/* Menu */
 .menu {
   list-style: none;
   padding: 0;
@@ -23,27 +32,31 @@
   width: 100%;
 }
 
-/* 🔥 CỐT LÕI */
+/* Menu item full width */
 .menu-item {
-  display: block;          /* QUAN TRỌNG */
-  width: 100%;             /* QUAN TRỌNG */
+  display: block;
+  width: 100%;
   padding: 14px 20px;
   color: white;
   text-decoration: none;
   transition: background 0.25s;
 }
 
-/* Hover full chiều ngang */
+/* Hover */
 .menu-item:hover {
   background: rgba(255, 255, 255, 0.08);
 }
 
 /* Active */
-.menu-item:active {
-  background: rgba(255, 255, 255, 0.12);
+.menu-item.active {
+  background: rgba(255, 255, 255, 0.15);
 }
 
-.LogOut {
+/* ============================= */
+/* ===== LOGOUT BUTTON ========= */
+/* ============================= */
+
+.logout {
   background-color: #A78656;
   padding: 14px 20px;
   position: absolute;
@@ -52,9 +65,78 @@
   border: none;
   cursor: pointer;
   color: aliceblue;
-  font-size: 20px;
+  font-size: 18px;
 }
 
-.LogOut:hover {
+.logout:hover {
   background: rgba(255, 255, 255, 0.08);
+}
+
+/* ============================= */
+/* ===== MOBILE HEADER ========= */
+/* ============================= */
+
+.mobile-header {
+  display: none;
+  height: 60px;
+  background: #A78656;
+  color: white;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.menu-icon {
+  font-size: 22px;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+.mobile-logo {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* ============================= */
+/* ===== OVERLAY =============== */
+/* ============================= */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 998;
+}
+
+/* ============================= */
+/* ===== RESPONSIVE MOBILE ===== */
+/* ============================= */
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    z-index: 999;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .mobile-header {
+    display: flex;
+  }
+}
+
+/* ============================= */
+/* ===== CONTENT LAYOUT ======== */
+/* ============================= */
+
+.content {
+  margin-left: 240px;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .content {
+    margin-left: 0;
+  }
 }

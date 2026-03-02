@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { Button } from "antd";
+import { Button, Col, Row } from "antd";
 import "./style.css";
 
 type Product = {
@@ -34,23 +34,24 @@ export default function ProductDetail() {
 
     return (
         <div className="detail-container">
-            <Button onClick={() => router.back()} style={{ marginBottom: 20}}>
+            <Button onClick={() => router.back()} style={{ marginBottom: 20 }}>
                 ← Quay lại
             </Button>
 
             <div className="detail-wrapper">
-                <div className="detail-image">
-                    <img src={product.thumbnail} alt={product.title} />
-                </div>
-
-                <div className="detail-info">
-                    <h1>{product.title}</h1>
-                    <p className="detail-brand">{product.brand}</p>
-                    <p className="detail-price">${product.price}</p>
-                    <p><b>Category:</b> {product.category}</p>
-                    <p><b>Stock:</b> {product.stock}</p>
-                    <p className="detail-description">{product.description}</p>
-                </div>
+                <Row gutter={[16, 24]}>
+                    <Col xs={24} md={12}><div className="detail-image">
+                        <img src={product.thumbnail} alt={product.title} />
+                    </div></Col>
+                    <Col xs={24} md={12}><div className="detail-info">
+                        <h1>{product.title}</h1>
+                        <p className="detail-brand">{product.brand}</p>
+                        <p className="detail-price">${product.price}</p>
+                        <p><b>Category:</b> {product.category}</p>
+                        <p><b>Stock:</b> {product.stock}</p>
+                        <p className="detail-description">{product.description}</p>
+                    </div></Col>
+                </Row>
             </div>
         </div>
     );

@@ -6,7 +6,7 @@ import "./globals.css";
 import MainLayout from "./layout/MainLayout";
 
 export const metadata = {
-  title: "My App",
+  title: "Shop",
   description: "Next.js App Router",
 };
 
