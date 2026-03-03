@@ -6,31 +6,31 @@ import { useState } from "react";
 import { MenuOutlined } from "@ant-design/icons";
 import "./Sidebar.css";
 
-const Sidebar = () => {
-  const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
+type Props = {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
+const Sidebar: React.FC<Props> = ({ open, setOpen }) => {
+  const pathname = usePathname();
+  
   return (
     <>
-      {/* ===== Mobile Header ===== */}
-      <div className="mobile-header">
+      
+      {/* <div className="mobile-header">
         <MenuOutlined
           className="menu-icon"
           onClick={() => setIsOpen(true)}
         />
-      </div>
+      </div> */}
 
-      {/* ===== Overlay ===== */}
-      {isOpen && (
-        <div
-          className="overlay"
-          onClick={() => setIsOpen(false)}
-        />
+      
+      {open && (
+        <div className="overlay" onClick={() => setOpen(false)} />
       )}
 
-      {/* ===== Sidebar ===== */}
-      <aside className={`sidebar ${isOpen ? "open" : ""}`}>
-        <h2 className="logo">Shop</h2>
+      
+      <aside className={`sidebar ${open ? "open" : ""}`}>
         <ul className="menu">
           <li>
             <Link
@@ -38,7 +38,7 @@ const Sidebar = () => {
               className={`menu-item ${
                 pathname === "/dashboard" ? "active" : ""
               }`}
-              onClick={() => setIsOpen(false)}
+              onClick={() => setOpen(false)}
             >
               Dashboard
             </Link>
@@ -50,7 +50,7 @@ const Sidebar = () => {
               className={`menu-item ${
                 pathname === "/listProducts" ? "active" : ""
               }`}
-              onClick={() => setIsOpen(false)}
+              onClick={() => setOpen(false)}
             >
               List of Products
             </Link>
@@ -62,7 +62,7 @@ const Sidebar = () => {
               className={`menu-item ${
                 pathname === "/products" ? "active" : ""
               }`}
-              onClick={() => setIsOpen(false)}
+              onClick={() => setOpen(false)}
             >
               Products
             </Link>

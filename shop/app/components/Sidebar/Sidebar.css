@@ -1,7 +1,3 @@
-/* ============================= */
-/* ===== SIDEBAR DESKTOP ====== */
-/* ============================= */
-
 .sidebar {
   position: fixed;
   top: 0;
@@ -25,7 +21,7 @@
 .menu {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin-top: 50px;
 }
 
 .menu li {
@@ -52,10 +48,6 @@
   background: rgba(255, 255, 255, 0.15);
 }
 
-/* ============================= */
-/* ===== LOGOUT BUTTON ========= */
-/* ============================= */
-
 .logout {
   background-color: #A78656;
   padding: 14px 20px;
@@ -72,34 +64,6 @@
   background: rgba(255, 255, 255, 0.08);
 }
 
-/* ============================= */
-/* ===== MOBILE HEADER ========= */
-/* ============================= */
-
-.mobile-header {
-  display: none;
-  height: 60px;
-  background: #A78656;
-  color: white;
-  align-items: center;
-  padding: 0 16px;
-}
-
-.menu-icon {
-  font-size: 22px;
-  cursor: pointer;
-  margin-right: 15px;
-}
-
-.mobile-logo {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-/* ============================= */
-/* ===== OVERLAY =============== */
-/* ============================= */
-
 .overlay {
   position: fixed;
   inset: 0;
@@ -107,28 +71,37 @@
   z-index: 998;
 }
 
-/* ============================= */
-/* ===== RESPONSIVE MOBILE ===== */
-/* ============================= */
-
 @media (max-width: 768px) {
   .sidebar {
+    position: fixed;
+    top: 60;
+    left: 0;
+    height: calc(100vh - 60px);
     transform: translateX(-100%);
-    z-index: 999;
+    transition: 0.3s ease;
+    z-index: 1000;
   }
 
   .sidebar.open {
     transform: translateX(0);
   }
 
-  .mobile-header {
-    display: flex;
+  .overlay {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+  }
+
+  .menu {
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
   }
 }
-
-/* ============================= */
-/* ===== CONTENT LAYOUT ======== */
-/* ============================= */
 
 .content {
   margin-left: 240px;

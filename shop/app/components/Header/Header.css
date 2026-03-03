@@ -1,6 +1,6 @@
 .header {
   position: sticky;
-  top: 0;              /* QUAN TRỌNG */
+  top: 0;
   z-index: 1000;
 
   height: 60px;
@@ -14,21 +14,39 @@
   padding: 0 20px;
 }
 
-/* Logo */
+/* LEFT GROUP */
+.left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* MENU BUTTON */
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* LOGO */
 .logo img {
   height: 45px;
   object-fit: contain;
 }
 
-/* Search */
-.search {
-  padding: 6px;
-}
-
-/* User */
+/* USER */
 .user {
   display: flex;
   align-items: center;
   gap: 8px;
-  cursor: pointer;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .menu-btn {
+    display: block;
+  }
 }
