@@ -14,7 +14,7 @@ const MainLayout: React.FC<Props> = ({ children }) => {
 
   return (
     <div className="container">
-      <Header onToggleSidebar={() => setOpen(true)} />
+      <Header onToggleSidebar={() => setOpen(prev => !prev)} />
 
       <div className="main">
         <Sidebar open={open} setOpen={setOpen} />

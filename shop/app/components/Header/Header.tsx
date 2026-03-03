@@ -15,13 +15,6 @@ const Header: React.FC<Props> = ({ onToggleSidebar }) => {
                 <button className="menu-btn" onClick={onToggleSidebar}>
                     <FontAwesomeIcon icon={faBars} />
                 </button>
-
-                <div className="logo">
-                    <img
-                        src="https://cdn.haitrieu.com/wp-content/uploads/2021/12/Logo-DH-Quoc-Te-Mien-Dong-EIU-Ogri.png"
-                        alt="logo"
-                    />
-                </div>
             </div>
 
             <div className="user">

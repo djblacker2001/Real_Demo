@@ -15,16 +15,7 @@ const Sidebar: React.FC<Props> = ({ open, setOpen }) => {
   const pathname = usePathname();
   
   return (
-    <>
-      
-      {/* <div className="mobile-header">
-        <MenuOutlined
-          className="menu-icon"
-          onClick={() => setIsOpen(true)}
-        />
-      </div> */}
-
-      
+    <>  
       {open && (
         <div className="overlay" onClick={() => setOpen(false)} />
       )}

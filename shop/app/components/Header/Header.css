@@ -23,7 +23,7 @@
 
 /* MENU BUTTON */
 .menu-btn {
-  display: none;
+  display: block;
   background: none;
   border: none;
   color: white;
@@ -42,11 +42,4 @@
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .menu-btn {
-    display: block;
-  }
 }

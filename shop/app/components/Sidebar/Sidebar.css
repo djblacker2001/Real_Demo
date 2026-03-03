@@ -1,13 +1,31 @@
 .sidebar {
   position: fixed;
-  top: 0;
+  top: 60;
   left: 0;
-  width: 240px;
-  height: 100vh;
-  background-color: #A78656;
-  color: white;
-  padding-top: 20px;
-  transition: transform 0.3s ease;
+  height: calc(100vh - 60px);
+  transform: translateX(-100%);
+  transition: 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.overlay {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin-top: 0;
 }
 
 /* Logo */
@@ -15,13 +33,6 @@
   padding: 0 20px 20px;
   font-size: 20px;
   font-weight: bold;
-}
-
-/* Menu */
-.menu {
-  list-style: none;
-  padding: 0;
-  margin-top: 50px;
 }
 
 .menu li {
@@ -64,13 +75,6 @@
   background: rgba(255, 255, 255, 0.08);
 }
 
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 998;
-}
-
 @media (max-width: 768px) {
   .sidebar {
     position: fixed;
@@ -104,12 +108,6 @@
 }
 
 .content {
-  margin-left: 240px;
+  margin-left: 0;
   padding: 20px;
-}
-
-@media (max-width: 768px) {
-  .content {
-    margin-left: 0;
-  }
 }
