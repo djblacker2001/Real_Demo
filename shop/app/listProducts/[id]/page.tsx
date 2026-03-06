@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { Button, Col, Row } from "antd";
+import { Button, Col, Row, Space } from "antd";
 import "./style.css";
 
 type Product = {
@@ -43,14 +43,24 @@ export default function ProductDetail() {
                     <Col xs={24} md={12}><div className="detail-image">
                         <img src={product.thumbnail} alt={product.title} />
                     </div></Col>
-                    <Col xs={24} md={12}><div className="detail-info">
-                        <h1>{product.title}</h1>
-                        <p className="detail-brand">{product.brand}</p>
-                        <p className="detail-price">${product.price}</p>
-                        <p><b>Category:</b> {product.category}</p>
-                        <p><b>Stock:</b> {product.stock}</p>
-                        <p className="detail-description">{product.description}</p>
-                    </div></Col>
+                    <Col xs={24} md={12}>
+                        <div className="detail-info">
+                            <h1>{product.title}</h1>
+                            <p className="detail-brand">{product.brand}</p>
+                            <p className="detail-price">${product.price}</p>
+                            <p><b>Category:</b> {product.category}</p>
+                            <p><b>Stock:</b> {product.stock}</p>
+                            <p className="detail-description">{product.description}</p>
+                        </div>
+                        <Space.Compact block>
+                            <Button type="primary">
+                                Mua ngay
+                            </Button>
+                            <Button>
+                                Thêm vào giỏ hàng
+                            </Button>
+                        </Space.Compact>
+                    </Col>
                 </Row>
             </div>
         </div>

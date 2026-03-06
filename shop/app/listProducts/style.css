@@ -2,6 +2,25 @@
   padding: 20px;
 }
 
+.list-container .head {
+  margin-left: 150px;
+  margin-right: 150px;
+  margin-bottom: 30px;
+}
+
+.list-container .header-product {
+  text-align: center;
+}
+
+.list-container .logo-shop {
+  width: 100px;
+}
+
+.list-container .search {
+  justify-items: center;
+  align-items: center;
+}
+
 /* Card */
 .product-card {
   border-radius: 12px;

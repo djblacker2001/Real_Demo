@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Row, Col, Card, Input, Pagination } from "antd";
+import { Row, Col, Card, Input, Pagination, Button } from "antd";
 import "./style.css";
 import { useRouter } from "next/navigation";
+import {ShoppingCartOutlined} from '@ant-design/icons';
 
 const { Search } = Input;
 const { Meta } = Card;
@@ -41,16 +42,24 @@ export default function ProductList() {
 
   return (
     <div className="list-container">
-      <h1>List Products</h1>
-
-      <Search
-        placeholder="Search products..."
-        onSearch={(value) => {
-          setPage(1);
-          setSearchText(value);
-        }}
-        style={{ marginBottom: 20, width: 300 }}
-      />
+      <div className="head">
+        <Row>
+          <Col span={6} className="header-product">
+            <a href="/"><img src="/shop.png" alt="Shop" className="logo-shop" /></a>
+          </Col>
+          <Col span={12} className="header-product">
+          <Search
+            size="large"
+            placeholder="Search products..."
+            onSearch={(value) => {
+              setPage(1);
+              setSearchText(value);
+            }}
+            className="search"
+          /></Col>
+          <Col span={6} className="header-product"><Button size="large"><ShoppingCartOutlined /></Button></Col>
+        </Row>
+      </div>
 
       <Row gutter={[16, 16]}>
         {products.map((item) => (
