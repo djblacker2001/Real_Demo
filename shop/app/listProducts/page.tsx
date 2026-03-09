@@ -45,7 +45,7 @@ export default function ProductList() {
       <div className="head">
         <Row>
           <Col span={6} className="header-product">
-            <a href="/"><img src="/shop.png" alt="Shop" className="logo-shop" /></a>
+            <a href="/shop"><img src="/shop.png" alt="Shop" className="logo-shop" /></a>
           </Col>
           <Col span={12} className="header-product">
           <Search
@@ -81,7 +81,7 @@ export default function ProductList() {
               <div className="product-details">
                 <h3>{item.title}</h3>
                 <p><b>Brand:</b> {item.brand}</p>
-                <p><b>Price:</b> ${item.price}</p>
+                <p className="product-price">${item.price}</p>
               </div>
             </Card>
           </Col>
