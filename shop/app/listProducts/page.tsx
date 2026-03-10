@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Row, Col, Card, Input, Pagination, Button } from "antd";
 import "./style.css";
 import { useRouter } from "next/navigation";
-import {ShoppingCartOutlined} from '@ant-design/icons';
+import { ShoppingCartOutlined } from '@ant-design/icons';
 
 const { Search } = Input;
 const { Meta } = Card;
@@ -25,42 +25,106 @@ export default function ProductList() {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [searchText, setSearchText] = useState("");
+  const [categories, setCategories] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [showCategory, setShowCategory] = useState(false);
 
   const pageSize = 8;
+  useEffect(() => {
+    fetch("https://dummyjson.com/products/categories")
+      .then(res => res.json())
+      .then(data => setCategories(data));
+  }, []);
 
   useEffect(() => {
-    fetch(
-      `https://dummyjson.com/products/search?q=${searchText}&limit=${pageSize}&skip=${(page - 1) * pageSize
-      }`
-    )
-      .then((res) => res.json())
-      .then((data) => {
+
+    let url = "";
+
+    if (selectedCategory) {
+      url = `https://dummyjson.com/products/category/${selectedCategory}?limit=${pageSize}&skip=${(page - 1) * pageSize}`;
+    } else {
+      url = `https://dummyjson.com/products/search?q=${searchText}&limit=${pageSize}&skip=${(page - 1) * pageSize}`;
+    }
+
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
         setProducts(data.products);
         setTotal(data.total);
       });
-  }, [page, searchText]);
+
+  }, [page, searchText, selectedCategory]);
 
   return (
     <div className="list-container">
       <div className="head">
-        <Row>
-          <Col span={6} className="header-product">
-            <a href="/shop"><img src="/shop.png" alt="Shop" className="logo-shop" /></a>
+        <Row gutter={[10, 10]} align="middle">
+
+          <Col xs={24} sm={6} md={6} className="header-product">
+            <a href="/">
+              <img src="/shop.png" alt="Shop" className="logo-shop" />
+            </a>
           </Col>
-          <Col span={12} className="header-product">
-          <Search
-            size="large"
-            placeholder="Search products..."
-            onSearch={(value) => {
-              setPage(1);
-              setSearchText(value);
-            }}
-            className="search"
-          /></Col>
-          <Col span={6} className="header-product"><Button size="large"><ShoppingCartOutlined /></Button></Col>
+
+          <Col xs={24} sm={12} md={12} className="header-product">
+            <Search
+              size="large"
+              placeholder="Search products..."
+              onSearch={(value) => {
+                setPage(1);
+                setSearchText(value);
+              }}
+              className="search"
+            />
+
+
+          </Col>
+
+          <Col xs={24} sm={6} md={6} className="header-product">
+            <Button
+              size="large"
+              onClick={() => setShowCategory(!showCategory)}
+            >
+              {showCategory ? "Hide Categories" : "Show Categories"}
+            </Button>
+            <Button
+              size="large"
+              style={{ marginLeft: "10px" }}
+            >
+              <ShoppingCartOutlined />
+              
+            </Button>
+          </Col>
+
         </Row>
       </div>
+      {showCategory && (
+      <div className="category-nav">
+        <Button
+          type={selectedCategory === "" ? "primary" : "default"}
+          onClick={() => {
+            setSelectedCategory("");
+            setPage(1);
+          }}
+        >
+          All
+        </Button>
 
+        {categories.map((cat) => (
+          <Button
+            key={cat.slug}
+            type={selectedCategory === cat.slug ? "primary" : "default"}
+            onClick={() => {
+              setSelectedCategory(cat.slug);
+              setPage(1);
+            }}
+          >
+            {cat.name}
+          </Button>
+        ))}
+      </div>
+      )}
+      
       <Row gutter={[16, 16]}>
         {products.map((item) => (
           <Col xs={24} sm={12} md={8} lg={6} key={item.id}>

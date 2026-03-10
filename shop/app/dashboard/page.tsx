@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import { Card, Row, Col, Statistic } from "antd";
 import "./style.css";
+import { ShoppingOutlined, AppstoreOutlined, InboxOutlined, DollarOutlined } from "@ant-design/icons";
+import AreaChart from "./AreaChart";
+import StockChart from "./StockChart";
 
 type Product = {
   id: number;
@@ -46,39 +49,58 @@ export default function Dashboard() {
 
       <h1>Shop information</h1>
 
-      <Row gutter={16}>
-        <Col span={6}>
-          <Card>
-            <Statistic title="Total Products" value={totalProducts} />
+      <Row gutter={[16, 16]}>
+        <Col xs={24} sm={12} md={6}>
+          <Card className="stats-card stats-blue">
+            <div className="stats-content">
+              <ShoppingOutlined className="stats-icon" />
+              <div>
+                <p className="stats-title">Total Products</p>
+                <h2>{totalProducts}</h2>
+              </div>
+            </div>
           </Card>
         </Col>
 
-        <Col span={6}>
-          <Card>
-            <Statistic title="Total Categories" value={categories.length} />
+        <Col xs={24} sm={12} md={6}>
+          <Card className="stats-card stats-green">
+            <div className="stats-content">
+              <AppstoreOutlined className="stats-icon" />
+              <div>
+                <p className="stats-title">Categories</p>
+                <h2>{categories.length}</h2>
+              </div>
+            </div>
           </Card>
         </Col>
 
-        <Col span={6}>
-          <Card>
-            <Statistic title="Total Stock" value={totalStock} />
+        <Col xs={24} sm={12} md={6}>
+          <Card className="stats-card stats-orange">
+            <div className="stats-content">
+              <InboxOutlined className="stats-icon" />
+              <div>
+                <p className="stats-title">Total Stock</p>
+                <h2>{totalStock}</h2>
+              </div>
+            </div>
           </Card>
         </Col>
 
-        <Col span={6}>
-          <Card>
-            <Statistic
-              title="Average Price"
-              value={avgPrice}
-              precision={2}
-              prefix="$"
-            />
+        <Col xs={24} sm={12} md={6}>
+          <Card className="stats-card stats-red">
+            <div className="stats-content">
+              <DollarOutlined className="stats-icon" />
+              <div>
+                <p className="stats-title">Average Price</p>
+                <h2>${avgPrice.toFixed(2)}</h2>
+              </div>
+            </div>
           </Card>
         </Col>
       </Row>
 
-      <Row gutter={16} style={{ marginTop: 20 }}>
-        <Col span={12}>
+      <Row gutter={[16, 16]} style={{ marginTop: 20 }}>
+        <Col xs={24} sm={12} md={12}>
           <Card title="Most Expensive Product">
             {mostExpensive && (
               <>
@@ -90,7 +112,7 @@ export default function Dashboard() {
           </Card>
         </Col>
 
-        <Col span={12}>
+        <Col xs={24} sm={12} md={12}>
           <Card title="Newest Product">
             {newestProduct && (
               <>
@@ -101,6 +123,21 @@ export default function Dashboard() {
             )}
           </Card>
         </Col>
+      </Row>
+      <Row gutter={[16, 16]} style={{ marginTop: 20 }}>
+
+        <Col xs={24} sm={12} md={12}>
+          <Card title="Production Area Chart">
+            <AreaChart />
+          </Card>
+        </Col>
+
+        <Col xs={24} sm={12} md={12}>
+          <Card title="Stock Chart">
+            <StockChart />
+          </Card>
+        </Col>
+
       </Row>
 
     </div>

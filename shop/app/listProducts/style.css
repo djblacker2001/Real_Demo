@@ -3,8 +3,6 @@
 }
 
 .list-container .head {
-  margin-left: 150px;
-  margin-right: 150px;
   margin-bottom: 30px;
 }
 
@@ -13,12 +11,20 @@
 }
 
 .list-container .logo-shop {
-  width: 100px;
+  width: 150px;
 }
 
 .list-container .search {
   justify-items: center;
   align-items: center;
+}
+
+.category-nav {
+  margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-around;
 }
 
 /* Card */
@@ -51,7 +57,8 @@
   max-width: 100%;
   max-height: 180px;
   object-fit: contain;
-  transition: transform 0.3s ease;
+  display: block;
+  margin: auto;   /* đảm bảo nằm giữa */
 }
 
 .product-card:hover .product-image {
@@ -105,4 +112,10 @@
 .pagination-wrapper {
   margin-top: 30px;
   text-align: center;
+}
+
+@media (max-width:768px) {
+  .logo-shop {
+    width: 60px;
+  }
 }

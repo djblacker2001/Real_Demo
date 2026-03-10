@@ -5,6 +5,7 @@ tang 3 => UI
 
 API
 https://dummyjson.com/products
+https://dummyjson.com/products/categories
 
 menu bao gồm
 1 category
