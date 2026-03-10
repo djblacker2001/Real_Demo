@@ -1,5 +1,7 @@
 .detail-container {
     padding: 40px;
+    margin-left: 100px;
+    margin-right: 100px;
 }
 
 .detail-wrapper {
@@ -10,18 +12,14 @@
 
 .detail-image {
     flex: 1;
-    min-width: 300px;
+    width: 300px;
 }
 
 .detail-image img {
-    position: static !important; /* Quan trọng: Hủy bỏ absolute nếu có */
+    position: static !important;
+    /* Quan trọng: Hủy bỏ absolute nếu có */
     width: 100%;
     border-radius: 12px;
-}
-
-.detail-info {
-    flex: 1;
-    min-width: 300px;
 }
 
 .detail-brand {
@@ -42,6 +40,12 @@
 }
 
 @media (max-width: 768px) {
+    .detail-container {
+        padding: 40px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
     .detail-info {
         padding-top: 20px;
     }

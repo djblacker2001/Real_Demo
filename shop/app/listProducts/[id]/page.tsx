@@ -40,10 +40,10 @@ export default function ProductDetail() {
 
             <div className="detail-wrapper">
                 <Row gutter={[16, 24]}>
-                    <Col xs={24} md={12}><div className="detail-image">
+                    <Col xs={24} md={8}><div className="detail-image">
                         <img src={product.thumbnail} alt={product.title} />
                     </div></Col>
-                    <Col xs={24} md={12}>
+                    <Col xs={24} md={16}>
                         <div className="detail-info">
                             <h1>{product.title}</h1>
                             <p className="detail-brand">{product.brand}</p>

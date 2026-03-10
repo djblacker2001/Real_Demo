@@ -3,6 +3,8 @@
 }
 
 .list-container .head {
+  margin-left: 100px;
+  margin-right: 100px;
   margin-bottom: 30px;
 }
 
@@ -11,7 +13,7 @@
 }
 
 .list-container .logo-shop {
-  width: 150px;
+  width: 250px;
 }
 
 .list-container .search {

@@ -11,10 +11,12 @@ type Props = {
 
 const MainLayout: React.FC<Props> = ({ children }) => {
   const [open, setOpen] = useState(false);
+  const [category, setCategory] = useState("");
+  const [searchText, setSearchText] = useState("");
 
   return (
     <div className="container">
-      <Header onToggleSidebar={() => setOpen(prev => !prev)} />
+      <Header onToggleSidebar={() => setOpen(prev => !prev)} onSearch={(value) => setSearchText(value)} onCategoryChange={(value) => setCategory(value)}/>
 
       <div className="main">
         <Sidebar open={open} setOpen={setOpen} />
