@@ -10,6 +10,7 @@ const { Search } = Input;
 const { Meta } = Card;
 
 type Product = {
+  discountPercentage: number;
   id: number;
   title: string;
   price: number;
@@ -62,64 +63,6 @@ export default function ProductList() {
 
   return (
     <div className="list-container">
-      <div className="head">
-        <Row gutter={[10, 10]} align="middle">
-
-          <Col xs={24} sm={6} md={6} className="header-product">
-
-          </Col>
-
-          <Col xs={24} sm={12} md={12} className="header-product">
-
-
-
-          </Col>
-
-          <Col xs={24} sm={6} md={6} className="header-product">
-            <Button
-              size="large"
-              onClick={() => setShowCategory(!showCategory)}
-            >
-              {showCategory ? "Hide Categories" : "Show Categories"}
-            </Button>
-            <Button
-              size="large"
-              style={{ marginLeft: "10px" }}
-            >
-              <ShoppingCartOutlined />
-
-            </Button>
-          </Col>
-
-        </Row>
-      </div>
-      {showCategory && (
-        <div className="category-nav">
-          <Button
-            type={selectedCategory === "" ? "primary" : "default"}
-            onClick={() => {
-              setSelectedCategory("");
-              setPage(1);
-            }}
-          >
-            All
-          </Button>
-
-          {categories.map((cat) => (
-            <Button
-              key={cat.slug}
-              type={selectedCategory === cat.slug ? "primary" : "default"}
-              onClick={() => {
-                setSelectedCategory(cat.slug);
-                setPage(1);
-              }}
-            >
-              {cat.name}
-            </Button>
-          ))}
-        </div>
-      )}
-
       <Row gutter={[16, 16]}>
         {products.map((item) => (
           <Col xs={24} sm={12} md={8} lg={6} key={item.id}>
@@ -140,8 +83,10 @@ export default function ProductList() {
               <div className="product-details">
                 <h3>{item.title}</h3>
                 <p><b>Brand:</b> {item.brand}</p>
+                <p><b>Stock:</b> {item.stock}</p>
                 <p className="product-price">${item.price}</p>
               </div>
+              <div className="discount">{item.discountPercentage}% off</div>
             </Card>
           </Col>
         ))}

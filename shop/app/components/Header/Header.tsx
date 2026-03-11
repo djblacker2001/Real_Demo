@@ -4,7 +4,7 @@ import { faUser, faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Header.css";
 import { GlobalOutlined, DownOutlined, BellOutlined, AppstoreAddOutlined } from "@ant-design/icons";
-import { MenuProps, Dropdown, Space, Button, Badge, Input } from "antd";
+import { MenuProps, Dropdown, Space, Button, Badge, Input, Row, Col } from "antd";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -37,21 +37,6 @@ const Header: React.FC<Props> = ({ onToggleSidebar }) => {
                 setCategories(data);
             });
     }, []);
-
-    const categoryItems =
-        categories.map((cat) => ({
-            key: cat.slug,
-            label: (
-                <span
-                    onClick={() =>
-                        router.push(`/listProducts?category=${cat.slug}`)
-                    }
-                >
-                    {cat.name}
-                </span>
-            ),
-        }));
-
 
     const items = [
         {
@@ -90,38 +75,33 @@ const Header: React.FC<Props> = ({ onToggleSidebar }) => {
                 </a>
                 <Search
                     placeholder="Search products..."
-                    style={{ width: 250, marginLeft: 20 }}
+                    className="search"
                     onSearch={(value) => { router.push(`/listProducts?search=${value}`); }}
                 />
             </div>
 
             <div className="user">
-                <Dropdown
-                    dropdownRender={() => (
-                        <div className="category-dropdown">
-                            {categories.map((cat) => (
-                                <div
-                                    key={cat.slug}
-                                    className="category-item"
-                                    onClick={() =>
-                                        router.push(`/listProducts?category=${cat.slug}`)
-                                    }
-                                >
-                                    {cat.name}
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                    trigger={["hover"]}
-                >
-                    <a onClick={(e) => e.preventDefault()} className="languages">
-                        <Space>
-                            <AppstoreAddOutlined />
-                            Categories
-                            <DownOutlined />
-                        </Space>
-                    </a>
-                </Dropdown>
+                <div className="category-wrapper">
+                    <div className="category-title">
+                        <AppstoreAddOutlined />
+                        Categories
+                        <DownOutlined />
+                    </div>
+
+                    <div className="category-panel">
+                        {categories.map((cat) => (
+                            <div
+                                key={cat.slug}
+                                className="category-item"
+                                onClick={() =>
+                                    router.push(`/listProducts?category=${cat.slug}`)
+                                }
+                            >
+                                {cat.name}
+                            </div>
+                        ))}
+                    </div>
+                </div>
                 <Badge count={3} className="notifications">
                     <BellOutlined />
                 </Badge>

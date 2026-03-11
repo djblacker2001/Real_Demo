@@ -62,7 +62,7 @@ export default function Dashboard() {
           </Card>
         </Col>
 
-        <Col xs={24} sm={12} md={6}>
+        <Col xs={24} sm={12} md={8} lg={6}>
           <Card className="stats-card stats-green">
             <div className="stats-content">
               <AppstoreOutlined className="stats-icon" />
@@ -74,7 +74,7 @@ export default function Dashboard() {
           </Card>
         </Col>
 
-        <Col xs={24} sm={12} md={6}>
+        <Col xs={24} sm={12} md={8} lg={6}>
           <Card className="stats-card stats-orange">
             <div className="stats-content">
               <InboxOutlined className="stats-icon" />
@@ -86,7 +86,7 @@ export default function Dashboard() {
           </Card>
         </Col>
 
-        <Col xs={24} sm={12} md={6}>
+        <Col xs={24} sm={12} md={8} lg={6}>
           <Card className="stats-card stats-red">
             <div className="stats-content">
               <DollarOutlined className="stats-icon" />

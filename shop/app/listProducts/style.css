@@ -69,6 +69,7 @@
 
 .product-details {
   padding: 10px;
+  position: relative;
 }
 
 .product-details h3 {
@@ -80,6 +81,18 @@
 .product-details p {
   margin: 3px 0;
   font-size: 14px;
+}
+
+.discount {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: #ff4d4f;
+  color: white;
+  padding: 5px 8px;
+  border-radius:0 6px 0 0;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 .ant-card-body {
