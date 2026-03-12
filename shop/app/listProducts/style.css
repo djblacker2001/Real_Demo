@@ -117,12 +117,36 @@
   margin-bottom: 6px;
 }
 
-.product-price {
-  font-size: 18px;
-  font-weight: bold;
-  color: #ff4d4f;
-  margin-top: 5px;
+.price {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
+
+.old-price {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 14px;
+}
+
+.new-price {
+  color: #ff4d4f;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.small-inform {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+}
+
+.warranty, .shipping {
+  color: #999;
+  font-size: 11px;
+  font-weight: 400;   
+}
+
 
 .pagination-wrapper {
   margin-top: 30px;

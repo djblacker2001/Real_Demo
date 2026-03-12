@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Row, Col, Card, Input, Pagination, Button } from "antd";
+import { Row, Col, Card, Input, Pagination, Button, Tag } from "antd";
 import "./style.css";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ShoppingCartOutlined } from '@ant-design/icons';
+import { FontSizeOutlined, ShoppingCartOutlined, TruckOutlined } from '@ant-design/icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShieldHalved } from "@fortawesome/free-solid-svg-icons";
 
 const { Search } = Input;
 const { Meta } = Card;
@@ -18,6 +20,9 @@ type Product = {
   category: string;
   stock: number;
   thumbnail: string;
+  warrantyInformation: string;
+  shippingInformation: string;
+  availabilityStatus: string;
 };
 
 export default function ProductList() {
@@ -84,7 +89,17 @@ export default function ProductList() {
                 <h3>{item.title}</h3>
                 <p><b>Brand:</b> {item.brand}</p>
                 <p><b>Stock:</b> {item.stock}</p>
-                <p className="product-price">${item.price}</p>
+                <p className="price">
+                  <span className="old-price">${item.price}</span>
+                  <span className="new-price">
+                    ${(item.price * (1 - item.discountPercentage / 100)).toFixed(2)}
+                  </span>
+                </p>
+                <Tag color="green">{item.availabilityStatus}</Tag>
+                <p className="small-inform">
+                  <span className="warranty"><FontAwesomeIcon icon={faShieldHalved} /> {item.warrantyInformation}</span>
+                  <span className="shipping"><TruckOutlined /> {item.shippingInformation}</span>
+                </p>
               </div>
               <div className="discount">{item.discountPercentage}% off</div>
             </Card>

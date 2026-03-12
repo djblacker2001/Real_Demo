@@ -1,25 +1,40 @@
 .detail-container {
-    padding: 40px;
-    margin-left: 100px;
-    margin-right: 100px;
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 20px;
 }
 
 .detail-wrapper {
     display: flex;
     gap: 40px;
     flex-wrap: wrap;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
 
 .detail-image {
     flex: 1;
-    width: 300px;
+    width: 100%;
+    position: relative;
 }
 
 .detail-image img {
     position: static !important;
-    /* Quan trọng: Hủy bỏ absolute nếu có */
     width: 100%;
     border-radius: 12px;
+}
+
+.discount-badge{
+    position:absolute;
+    top:10px;
+    left:10px;
+    background:#ff4d4f;
+    color:white;
+    padding:6px 10px;
+    border-radius:6px;
+    font-weight:bold;
 }
 
 .detail-brand {
@@ -27,11 +42,43 @@
     color: gray;
 }
 
-.detail-price {
-    font-size: 24px;
-    font-weight: bold;
-    color: #ff4d4f;
+.price {
+    display: flex;
+    gap: 15px;
+    align-items: center;
     margin: 10px 0;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.new-price {
+    color: #ff4d4f;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.review-card {
+    margin-bottom: 15px;
+    border-radius:10px;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.review-date {
+    font-size: 12px;
+    color: #888;
+}
+
+.return-policy {
+    margin-top: 10px;
+    color: #555;
 }
 
 .detail-description {
@@ -39,11 +86,30 @@
     line-height: 1.6;
 }
 
+.product-extra-info {
+    margin-top: 15px;
+}
+
+.tags {
+    margin-top: 5px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.buy-box{
+    margin-top:20px;
+    display:flex;
+    gap:10px;
+}
+
 @media (max-width: 768px) {
     .detail-container {
-        padding: 40px;
-        margin-left: 0px;
-        margin-right: 0px;
+        padding: 20px;
+    }
+
+    .detail-wrapper {
+        padding:20px;
     }
 
     .detail-info {
