@@ -1,0 +1,18 @@
+.category-bar{
+  display:flex;
+  gap:30px;
+  padding:10px 40px;
+  background:#f5f5f5;
+  border-bottom:1px solid #ddd;
+  overflow-x:auto;
+}
+
+.category-item{
+  cursor:pointer;
+  font-weight:500;
+  white-space:nowrap;
+}
+
+.category-item:hover{
+  color:#ff4d4f;
+}

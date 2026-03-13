@@ -70,9 +70,7 @@ const Header: React.FC<Props> = ({ onToggleSidebar }) => {
                 <button className="menu-btn" onClick={onToggleSidebar}>
                     <FontAwesomeIcon icon={faBars} />
                 </button>
-                <a href="/">
-                    <img src="/shop.png" alt="Shop" className="logo-shop" />
-                </a>
+                <a className="logo" href="/">Shop<span>Now</span></a>
                 <Search
                     placeholder="Search products..."
                     className="search"
@@ -81,27 +79,6 @@ const Header: React.FC<Props> = ({ onToggleSidebar }) => {
             </div>
 
             <div className="user">
-                <div className="category-wrapper">
-                    <div className="category-title">
-                        <AppstoreAddOutlined />
-                        Categories
-                        <DownOutlined />
-                    </div>
-
-                    <div className="category-panel">
-                        {categories.map((cat) => (
-                            <div
-                                key={cat.slug}
-                                className="category-item"
-                                onClick={() =>
-                                    router.push(`/listProducts?category=${cat.slug}`)
-                                }
-                            >
-                                {cat.name}
-                            </div>
-                        ))}
-                    </div>
-                </div>
                 <Badge count={3} className="notifications">
                     <BellOutlined />
                 </Badge>
