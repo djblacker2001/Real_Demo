@@ -3,8 +3,8 @@
 import { faUser, faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Header.css";
-import { GlobalOutlined, DownOutlined, BellOutlined, AppstoreAddOutlined } from "@ant-design/icons";
-import { MenuProps, Dropdown, Space, Button, Badge, Input, Row, Col } from "antd";
+import { GlobalOutlined, DownOutlined, BellOutlined, AppstoreAddOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import { MenuProps, Dropdown, Space, Button, Badge, Input, Row, Col, Avatar } from "antd";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -25,6 +25,7 @@ type Category = {
 
 const Header: React.FC<Props> = ({ onToggleSidebar }) => {
     const router = useRouter();
+    const [username, setUsername] = useState<string>('');
     const [language, setLanguage] = useState("English");
     const [categories, setCategories] = useState<Category[]>([]);
 
@@ -37,6 +38,36 @@ const Header: React.FC<Props> = ({ onToggleSidebar }) => {
                 setCategories(data);
             });
     }, []);
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            const user = JSON.parse(storedUser);
+            setUsername(user.username);
+        }
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem('user');
+        router.push('/login');
+    };
+
+    const item: MenuProps['items'] = [
+        {
+            key: 'username',
+            label: <strong>{username}</strong>,
+            disabled: true,
+        },
+        {
+            type: 'divider',
+        },
+        {
+            key: 'logout',
+            label: 'Đăng xuất',
+            icon: <LogoutOutlined />,
+            onClick: handleLogout,
+        },
+    ];
 
     const items = [
         {
@@ -91,8 +122,14 @@ const Header: React.FC<Props> = ({ onToggleSidebar }) => {
                         </Space>
                     </a>
                 </Dropdown>
-                <FontAwesomeIcon icon={faUser} />
-                <span>Admin</span>
+                <Dropdown menu={{ item }} placement="bottomRight">
+                    <Space style={{ cursor: 'pointer' }}>
+                        <Avatar icon={<UserOutlined />} />
+                        <span style={{ fontWeight: 500 }}>
+                            {username || 'Guest'}
+                        </span>
+                    </Space>
+                </Dropdown>
             </div>
         </header>
     );

@@ -12,6 +12,7 @@ import PriceFilter from "./listFilter/PriceFilter";
 import RatingFilter from "./listFilter/RatingFilter";
 import ProductToolbar from "./ProductToolbar";
 import StickyBox from "react-sticky-box";
+import MainLayout from "../layout/MainLayout";
 
 const { Search } = Input;
 const { Meta } = Card;
@@ -141,6 +142,7 @@ export default function ProductList() {
   }, [priceRange, ratingFilter, sortBy]);
 
   return (
+    <MainLayout>
     <div className="list-container">
       <aside className="filter-aside">
         <PriceFilter setPriceRange={setPriceRange} />
@@ -204,8 +206,7 @@ export default function ProductList() {
           />
         </div>
       </div>
-
-
     </div>
+    </MainLayout>
   );
 }

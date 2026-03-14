@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import "./style.css";
 import { Input, Pagination } from "antd";
+import MainLayout from "../layout/MainLayout";
 
 const { Search } = Input;
 
@@ -90,144 +91,145 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="container">
-      <h1 className="title">PRODUCT MANAGEMENT</h1>
+    <MainLayout>
+      <div className="container">
+        <h1 className="title">PRODUCT MANAGEMENT</h1>
+        <Search
+          placeholder="Search products..."
+          enterButton
+          onSearch={(value) => {
+            setCurrentPage(1);
+            setSearchText(value);
+          }}
+          style={{ marginBottom: 20, width: 300, marginRight: 20 }}
+        />
 
-      <Search
-        placeholder="Search products..."
-        enterButton
-        onSearch={(value) => {
-          setCurrentPage(1);
-          setSearchText(value);
-        }}
-        style={{ marginBottom: 20, width: 300 }}
-      />
+        <button className="addBtn" onClick={openAdd}>
+          + Thêm sản phẩm
+        </button>
 
-      <button className="addBtn" onClick={openAdd}>
-        + Thêm sản phẩm
-      </button>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Tên</th>
+              <th>Brand</th>
+              <th>Category</th>
+              <th>Giá</th>
+              <th>Stock</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
 
-      <table className="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Tên</th>
-            <th>Brand</th>
-            <th>Category</th>
-            <th>Giá</th>
-            <th>Stock</th>
-            <th>Hành động</th>
-          </tr>
-        </thead>
+          <tbody>
+            {products.map((p) => (
+              <tr key={p.id}>
+                <td>{p.id}</td>
+                <td>{p.title}</td>
+                <td>{p.brand}</td>
+                <td>{p.category}</td>
+                <td>${p.price}</td>
+                <td>{p.stock}</td>
+                <td>
+                  <button className="editBtn" onClick={() => openEdit(p)}>
+                    Sửa
+                  </button>
+                  <button
+                    className="deleteBtn"
+                    onClick={() => handleDelete(p.id)}
+                  >
+                    Xóa
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
-        <tbody>
-          {products.map((p) => (
-            <tr key={p.id}>
-              <td>{p.id}</td>
-              <td>{p.title}</td>
-              <td>{p.brand}</td>
-              <td>{p.category}</td>
-              <td>${p.price}</td>
-              <td>{p.stock}</td>
-              <td>
-                <button className="editBtn" onClick={() => openEdit(p)}>
-                  Sửa
+        <Pagination
+          className="pagination"
+          current={currentPage}
+          pageSize={pageSize}
+          total={total}
+          onChange={(page) => setCurrentPage(page)}
+          showSizeChanger={false}
+          showQuickJumper
+          showTotal={(total) => `Tổng ${total} sản phẩm`}
+        />
+
+        {isOpen && (
+          <div className="modalOverlay">
+            <div className="modal">
+              <h2>{editing ? "Sửa" : "Thêm"} sản phẩm</h2>
+
+              <input
+                className="input"
+                placeholder="Tên sản phẩm"
+                value={formData.title}
+                onChange={(e) =>
+                  setFormData({ ...formData, title: e.target.value })
+                }
+              />
+
+              <input
+                className="input"
+                placeholder="Brand"
+                value={formData.brand}
+                onChange={(e) =>
+                  setFormData({ ...formData, brand: e.target.value })
+                }
+              />
+
+              <input
+                className="input"
+                placeholder="Category"
+                value={formData.category}
+                onChange={(e) =>
+                  setFormData({ ...formData, category: e.target.value })
+                }
+              />
+
+              <input
+                className="input"
+                type="number"
+                placeholder="Giá"
+                value={formData.price}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    price: Number(e.target.value),
+                  })
+                }
+              />
+
+              <input
+                className="input"
+                type="number"
+                placeholder="Stock"
+                value={formData.stock}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    stock: Number(e.target.value),
+                  })
+                }
+              />
+
+              <div className="modalActions">
+                <button className="saveBtn" onClick={handleSave}>
+                  Lưu
                 </button>
                 <button
-                  className="deleteBtn"
-                  onClick={() => handleDelete(p.id)}
+                  className="cancelBtn"
+                  onClick={() => setIsOpen(false)}
                 >
-                  Xóa
+                  Hủy
                 </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <Pagination
-        className="pagination"
-        current={currentPage}
-        pageSize={pageSize}
-        total={total}
-        onChange={(page) => setCurrentPage(page)}
-        showSizeChanger={false}
-        showQuickJumper
-        showTotal={(total) => `Tổng ${total} sản phẩm`}
-      />
-
-      {isOpen && (
-        <div className="modalOverlay">
-          <div className="modal">
-            <h2>{editing ? "Sửa" : "Thêm"} sản phẩm</h2>
-
-            <input
-              className="input"
-              placeholder="Tên sản phẩm"
-              value={formData.title}
-              onChange={(e) =>
-                setFormData({ ...formData, title: e.target.value })
-              }
-            />
-
-            <input
-              className="input"
-              placeholder="Brand"
-              value={formData.brand}
-              onChange={(e) =>
-                setFormData({ ...formData, brand: e.target.value })
-              }
-            />
-
-            <input
-              className="input"
-              placeholder="Category"
-              value={formData.category}
-              onChange={(e) =>
-                setFormData({ ...formData, category: e.target.value })
-              }
-            />
-
-            <input
-              className="input"
-              type="number"
-              placeholder="Giá"
-              value={formData.price}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  price: Number(e.target.value),
-                })
-              }
-            />
-
-            <input
-              className="input"
-              type="number"
-              placeholder="Stock"
-              value={formData.stock}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  stock: Number(e.target.value),
-                })
-              }
-            />
-
-            <div className="modalActions">
-              <button className="saveBtn" onClick={handleSave}>
-                Lưu
-              </button>
-              <button
-                className="cancelBtn"
-                onClick={() => setIsOpen(false)}
-              >
-                Hủy
-              </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </MainLayout>
   );
 }

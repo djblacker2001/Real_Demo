@@ -6,6 +6,7 @@
   transform: translateX(-100%);
   transition: 0.3s ease;
   z-index: 1000;
+  background-color: #A78656;
 }
 
 .sidebar.open {
