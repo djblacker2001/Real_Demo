@@ -57,8 +57,9 @@ export default function ProductList() {
       priceAfterDiscount <= priceRange[1];
 
     const rating =
-      p.reviews?.reduce((sum, r) => sum + r.rating, 0) /
-      (p.reviews?.length || 1);
+      p.reviews?.length
+        ? p.reviews.reduce((sum, r) => sum + r.rating, 0) / p.reviews.length
+        : 0;
 
     const ratingMatch =
       !ratingFilter || rating >= ratingFilter;
@@ -66,6 +67,7 @@ export default function ProductList() {
     return priceMatch && ratingMatch;
 
   });
+
   const paginatedProducts =
     filteredProducts.slice(
       (page - 1) * pageSize,
@@ -84,7 +86,7 @@ export default function ProductList() {
     if (category) {
       url = `https://dummyjson.com/products/category/${category}`;
     } else {
-      url = `https://dummyjson.com/products/search?q=${searchText}&limit=${pageSize}&skip=${(page - 1) * pageSize}`;
+      url = `https://dummyjson.com/products/search?q=${searchText}&limit=100`;
     }
 
     fetch(url)
@@ -101,14 +103,14 @@ export default function ProductList() {
   return (
     <div className="list-container">
       <aside className="filter-aside">
-        <PriceFilter setPriceRange={setPriceRange}/>
+        <PriceFilter setPriceRange={setPriceRange} />
         <RatingFilter setRatingFilter={setRatingFilter} />
         <DiscountFilter />
       </aside>
       <div className="product-main">
         <ProductToolbar total={filteredProducts.length} />
         <Row gutter={[16, 16]}>
-          {products.map((item) => (
+          {paginatedProducts.map((item) => (
             <Col xs={24} sm={12} md={8} lg={6} key={item.id}>
               <Card
                 hoverable
@@ -149,7 +151,7 @@ export default function ProductList() {
           <Pagination
             current={page}
             pageSize={pageSize}
-            total={total}
+            total={filteredProducts.length}
             onChange={(p) => setPage(p)}
           />
         </div>
