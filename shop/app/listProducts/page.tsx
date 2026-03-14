@@ -16,8 +16,15 @@ import StickyBox from "react-sticky-box";
 const { Search } = Input;
 const { Meta } = Card;
 
+type Review = {
+  rating: number;
+  comment: string;
+  date: string;
+  reviewerName: string;
+};
+
 type Product = {
-  reviews: any;
+  reviews: Review[];
   discountPercentage: number;
   id: number;
   title: string;
@@ -41,32 +48,63 @@ export default function ProductList() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [showCategory, setShowCategory] = useState(false);
   const pageSize = 8;
+  const [sortBy, setSortBy] = useState("default");
+  const [viewMode, setViewMode] = useState("grid");
+  const [discountOnly, setDiscountOnly] = useState(false);
 
   const searchParams = useSearchParams();
   const searchText = searchParams.get("search") || "";
   const category = searchParams.get("category") || "";
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 2000]);
   const [ratingFilter, setRatingFilter] = useState<number | null>(null);
-  const filteredProducts = products.filter((p) => {
+  const filteredProducts = products
+    .filter((p) => {
 
-    const priceAfterDiscount =
-      p.price * (1 - p.discountPercentage / 100);
+      const priceAfterDiscount =
+        p.price * (1 - p.discountPercentage / 100);
 
-    const priceMatch =
-      priceAfterDiscount >= priceRange[0] &&
-      priceAfterDiscount <= priceRange[1];
+      const priceMatch =
+        priceAfterDiscount >= priceRange[0] &&
+        priceAfterDiscount <= priceRange[1];
 
-    const rating =
-      p.reviews?.length
-        ? p.reviews.reduce((sum, r) => sum + r.rating, 0) / p.reviews.length
-        : 0;
+      const rating =
+        p.reviews?.length
+          ? p.reviews.reduce((sum, r) => sum + r.rating, 0) / p.reviews.length
+          : 0;
 
-    const ratingMatch =
-      !ratingFilter || rating >= ratingFilter;
+      const ratingMatch =
+        !ratingFilter || rating >= ratingFilter;
 
-    return priceMatch && ratingMatch;
+      const discountMatch =
+        !discountOnly || p.discountPercentage > 0;
 
-  });
+      return priceMatch && ratingMatch && discountMatch;
+
+    })
+
+    .sort((a, b) => {
+
+      const priceA = a.price * (1 - a.discountPercentage / 100);
+      const priceB = b.price * (1 - b.discountPercentage / 100);
+
+      const ratingA =
+        a.reviews?.length
+          ? a.reviews.reduce((s, r) => s + r.rating, 0) / a.reviews.length
+          : 0;
+
+      const ratingB =
+        b.reviews?.length
+          ? b.reviews.reduce((s, r) => s + r.rating, 0) / b.reviews.length
+          : 0;
+
+      if (sortBy === "price-asc") return priceA - priceB;
+      if (sortBy === "price-desc") return priceB - priceA;
+      if (sortBy === "rating") return ratingB - ratingA;
+
+      return 0;
+
+    });
+
 
   const paginatedProducts =
     filteredProducts.slice(
@@ -98,20 +136,30 @@ export default function ProductList() {
 
   }, [page, searchText, category]);
 
-
+  useEffect(() => {
+    setPage(1);
+  }, [priceRange, ratingFilter, sortBy]);
 
   return (
     <div className="list-container">
       <aside className="filter-aside">
         <PriceFilter setPriceRange={setPriceRange} />
         <RatingFilter setRatingFilter={setRatingFilter} />
-        <DiscountFilter />
+        <DiscountFilter setDiscountOnly={setDiscountOnly} />
       </aside>
       <div className="product-main">
-        <ProductToolbar total={filteredProducts.length} />
+        <ProductToolbar
+          total={filteredProducts.length}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          viewMode={viewMode}
+          setViewMode={setViewMode}
+        />
         <Row gutter={[16, 16]}>
           {paginatedProducts.map((item) => (
-            <Col xs={24} sm={12} md={8} lg={6} key={item.id}>
+            <Col xs={24} sm={viewMode === "grid" ? 12 : 24}
+              md={viewMode === "grid" ? 8 : 24}
+              lg={viewMode === "grid" ? 6 : 24} key={item.id}>
               <Card
                 hoverable
                 style={{ width: '100%' }}

@@ -1,4 +1,4 @@
-import { Select } from "antd";
+import { Button, Select } from "antd";
 import "./style.css";
 import { AppstoreOutlined, BarsOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
@@ -11,7 +11,22 @@ type Product = {
     stock: number;
 };
 
-export default function ProductToolbar({ total }: { total: number }) {
+type Props = {
+    total: number;
+    sortBy: string;
+    setSortBy: (value: string) => void;
+    viewMode: string;
+    setViewMode: (value: string) => void;
+};
+
+export default function ProductToolbar({
+    total,
+    sortBy,
+    setSortBy,
+    viewMode,
+    setViewMode
+}: Props) {
+
     const [categories, setCategories] = useState<string[]>([]);
     const [products, setProducts] = useState<Product[]>([]);
     useEffect(() => {
@@ -24,32 +39,42 @@ export default function ProductToolbar({ total }: { total: number }) {
             .then((data) => setCategories(data));
     }, []);
 
-
-    const totalProducts = products.length;
     return (
         <div className="product-toolbar">
 
             <div className="product-count">
-                {totalProducts} products
+                {total} products
             </div>
 
             <div className="toolbar-right">
 
                 <Select
-                    defaultValue="default"
-                    style={{ width: 150 }}
+                    value={sortBy}
+                    style={{ width: 180 }}
+                    onChange={(value) => setSortBy(value)}
                     options={[
                         { value: "default", label: "Mặc định" },
-                        { value: "price-asc", label: "Giá tăng" },
-                        { value: "price-desc", label: "Giá giảm" }
+                        { value: "price-asc", label: "Giá tăng dần" },
+                        { value: "price-desc", label: "Giá giảm dần" },
+                        { value: "rating", label: "Đánh giá cao nhất" },
                     ]}
                 />
 
-                <AppstoreOutlined className="view-icon" />
-                <BarsOutlined className="view-icon" />
+                <Button
+                    type={viewMode === "grid" ? "primary" : "default"}
+                    icon={<AppstoreOutlined />}
+                    onClick={() => setViewMode("grid")}
+                />
+
+                <Button
+                    type={viewMode === "list" ? "primary" : "default"}
+                    icon={<BarsOutlined />}
+                    onClick={() => setViewMode("list")}
+                />
 
             </div>
 
         </div>
     )
 }
+

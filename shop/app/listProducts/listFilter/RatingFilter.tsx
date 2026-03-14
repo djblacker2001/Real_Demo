@@ -1,7 +1,11 @@
 import { Checkbox } from "antd";
 import "./filter.css";
 
-export default function RatingFilter({ setRatingFilter }: { setRatingFilter: (rating: number) => void }) {
+type Rating = {
+    setRatingFilter: (value: number) => void;
+}; 
+
+export default function RatingFilter({ setRatingFilter }: Rating) {
 
     return (
         <div className="filter-box">
