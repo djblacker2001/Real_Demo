@@ -7,9 +7,7 @@ import { GlobalOutlined, DownOutlined, BellOutlined, AppstoreAddOutlined, Logout
 import { MenuProps, Dropdown, Space, Button, Badge, Input, Row, Col, Avatar } from "antd";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
-const { Search } = Input;
-
+import Search from "antd/es/input/Search";
 
 type Props = {
     onToggleSidebar: () => void;
@@ -37,6 +35,8 @@ const Header: React.FC<Props> = ({ onToggleSidebar }) => {
                 console.log(data);
                 setCategories(data);
             });
+            
+            
     }, []);
 
     useEffect(() => {
@@ -52,7 +52,7 @@ const Header: React.FC<Props> = ({ onToggleSidebar }) => {
         router.push('/login');
     };
 
-    const item: MenuProps['items'] = [
+    const items: MenuProps['items'] = [
         {
             key: 'username',
             label: <strong>{username}</strong>,
@@ -69,7 +69,7 @@ const Header: React.FC<Props> = ({ onToggleSidebar }) => {
         },
     ];
 
-    const items = [
+    const item = [
         {
             key: "en",
             label: (
@@ -113,7 +113,7 @@ const Header: React.FC<Props> = ({ onToggleSidebar }) => {
                 <Badge count={3} className="notifications">
                     <BellOutlined />
                 </Badge>
-                <Dropdown menu={{ items }} placement="bottomRight">
+                <Dropdown menu={{ items: item }} placement="bottomRight">
                     <a onClick={(e) => e.preventDefault()} className="languages">
                         <Space>
                             <GlobalOutlined />
@@ -122,7 +122,7 @@ const Header: React.FC<Props> = ({ onToggleSidebar }) => {
                         </Space>
                     </a>
                 </Dropdown>
-                <Dropdown menu={{ item }} placement="bottomRight">
+                <Dropdown menu={{ items: items }} placement="bottomRight">
                     <Space style={{ cursor: 'pointer' }}>
                         <Avatar icon={<UserOutlined />} />
                         <span style={{ fontWeight: 500 }}>

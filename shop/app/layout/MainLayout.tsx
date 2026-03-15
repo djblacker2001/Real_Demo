@@ -5,6 +5,7 @@ import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import Sidebar from "../components/Sidebar/Sidebar";
 import CategoryBar from "../components/CategoryBar/CategoryBar";
+import "./layout.css"
 
 type Props = {
   children: React.ReactNode;
@@ -16,7 +17,7 @@ const MainLayout: React.FC<Props> = ({ children }) => {
   const [searchText, setSearchText] = useState("");
 
   return (
-    <div className="container">
+    <div className="layout">
       <Header onToggleSidebar={() => setOpen(prev => !prev)} onSearch={(value) => setSearchText(value)} onCategoryChange={(value) => setCategory(value)}/>
       <CategoryBar />
       <div className="main">

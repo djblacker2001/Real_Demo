@@ -25,3 +25,7 @@ body {
   height: 100%;
   margin: 0;
 }
+
+.landing {
+  min-height: 100vh;
+}
