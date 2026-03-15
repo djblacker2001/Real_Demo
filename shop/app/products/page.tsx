@@ -92,7 +92,7 @@ export default function ProductsPage() {
 
   return (
     <MainLayout>
-      <div className="container">
+      <div className="layout">
         <h1 className="title">PRODUCT MANAGEMENT</h1>
         <Search
           placeholder="Search products..."

@@ -1,3 +1,7 @@
+.layout {
+  min-height: 100vh;
+}
+
 .title {
   font-size: 24px;
   margin-bottom: 20px;
@@ -133,7 +137,7 @@
 }
 
 .pagination button {
-    color: black;
+  color: black;
   padding: 6px 12px;
   border: 1px solid black;
   background: white;
