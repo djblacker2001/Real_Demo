@@ -15,7 +15,7 @@
 /* Toàn màn hình + nền */
 body {
   margin: 0;
-  min-height: 100vh;
+  height: 200px;
   background: linear-gradient(135deg, #4f46e5, #22c55e);
 }
 
@@ -41,7 +41,6 @@ body {
 
 /* Button */
 .ant-btn-primary {
-  height: 40px;
   border-radius: 8px;
   background-color: #4f46e5;
   border-color: #4f46e5;

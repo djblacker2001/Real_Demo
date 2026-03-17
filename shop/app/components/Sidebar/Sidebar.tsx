@@ -20,7 +20,6 @@ const Sidebar: React.FC<Props> = ({ open, setOpen }) => {
         <div className="overlay" onClick={() => setOpen(false)} />
       )}
 
-      
       <aside className={`sidebar ${open ? "open" : ""}`}>
         <ul className="menu">
           <li>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Row, Col, Card, Input, Pagination, Button, Tag } from "antd";
 import "./style.css";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -138,75 +138,76 @@ export default function ProductList() {
   }, [page, searchText, category]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPage(1);
   }, [priceRange, ratingFilter, sortBy]);
 
   return (
     <MainLayout>
-    <div className="list-container">
-      <aside className="filter-aside">
-        <PriceFilter setPriceRange={setPriceRange} />
-        <RatingFilter setRatingFilter={setRatingFilter} />
-        <DiscountFilter setDiscountOnly={setDiscountOnly} />
-      </aside>
-      <div className="product-main">
-        <ProductToolbar
-          total={filteredProducts.length}
-          sortBy={sortBy}
-          setSortBy={setSortBy}
-          viewMode={viewMode}
-          setViewMode={setViewMode}
-        />
-        <Row gutter={[16, 16]}>
-          {paginatedProducts.map((item) => (
-            <Col xs={24} sm={viewMode === "grid" ? 12 : 24}
-              md={viewMode === "grid" ? 8 : 24}
-              lg={viewMode === "grid" ? 6 : 24} key={item.id}>
-              <Card
-                hoverable
-                style={{ width: '100%' }}
-                cover={
-                  <div className="product-image-container">
-                    <img
-                      alt={item.title}
-                      src={item.thumbnail}
-                      className="product-image"
-                    />
-                  </div>
-                }
-                onClick={() => router.push(`/listProducts/${item.id}`)}
-              >
-                <div className="product-details">
-                  <h3>{item.title}</h3>
-                  <p><b>Brand:</b> {item.brand}</p>
-                  <p><b>Stock:</b> {item.stock}</p>
-                  <p className="price">
-                    <span className="old-price">${item.price}</span>
-                    <span className="new-price">
-                      ${(item.price * (1 - item.discountPercentage / 100)).toFixed(2)}
-                    </span>
-                  </p>
-                  <Tag color="green">{item.availabilityStatus}</Tag>
-                  <p className="small-inform">
-                    <span className="warranty"><FontAwesomeIcon icon={faShieldHalved} /> {item.warrantyInformation}</span>
-                    <span className="shipping"><TruckOutlined /> {item.shippingInformation}</span>
-                  </p>
-                </div>
-                <div className="discount">{item.discountPercentage}% off</div>
-              </Card>
-            </Col>
-          ))}
-        </Row>
-        <div className="pagination-wrapper">
-          <Pagination
-            current={page}
-            pageSize={pageSize}
+      <div className="list-container">
+        <aside className="filter-aside">
+          <PriceFilter setPriceRange={setPriceRange} />
+          <RatingFilter setRatingFilter={setRatingFilter} />
+          <DiscountFilter setDiscountOnly={setDiscountOnly} />
+        </aside>
+        <div className="product-main">
+          <ProductToolbar
             total={filteredProducts.length}
-            onChange={(p) => setPage(p)}
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+            viewMode={viewMode}
+            setViewMode={setViewMode}
           />
+          <Row gutter={[16, 16]}>
+            {paginatedProducts.map((item) => (
+              <Col xs={24} sm={viewMode === "grid" ? 12 : 24}
+                md={viewMode === "grid" ? 8 : 24}
+                lg={viewMode === "grid" ? 6 : 24} key={item.id}>
+                <Card
+                  hoverable
+                  style={{ width: '100%' }}
+                  cover={
+                    <div className="product-image-container">
+                      <img
+                        alt={item.title}
+                        src={item.thumbnail}
+                        className="product-image"
+                      />
+                    </div>
+                  }
+                  onClick={() => router.push(`/listProducts/${item.id}`)}
+                >
+                  <div className="product-details">
+                    <h3>{item.title}</h3>
+                    <p><b>Brand:</b> {item.brand}</p>
+                    <p><b>Stock:</b> {item.stock}</p>
+                    <p className="price">
+                      <span className="old-price">${item.price}</span>
+                      <span className="new-price">
+                        ${(item.price * (1 - item.discountPercentage / 100)).toFixed(2)}
+                      </span>
+                    </p>
+                    <Tag color="green">{item.availabilityStatus}</Tag>
+                    <p className="small-inform">
+                      <span className="warranty"><FontAwesomeIcon icon={faShieldHalved} /> {item.warrantyInformation}</span>
+                      <span className="shipping"><TruckOutlined /> {item.shippingInformation}</span>
+                    </p>
+                  </div>
+                  <div className="discount">{item.discountPercentage}% off</div>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+          <div className="pagination-wrapper">
+            <Pagination
+              current={page}
+              pageSize={pageSize}
+              total={filteredProducts.length}
+              onChange={(p) => setPage(p)}
+            />
+          </div>
         </div>
       </div>
-    </div>
     </MainLayout>
   );
 }

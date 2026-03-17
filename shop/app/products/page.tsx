@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import "./style.css";
 import { Input, Pagination } from "antd";
 import MainLayout from "../layout/MainLayout";
+import { useRouter } from "next/navigation";
 
 const { Search } = Input;
 
@@ -17,6 +18,7 @@ type Product = {
 };
 
 export default function ProductsPage() {
+  const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [total, setTotal] = useState(0);
@@ -34,6 +36,14 @@ export default function ProductsPage() {
     category: "",
     stock: 0,
   });
+
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+
+    if (!user) {
+      router.push('/login');
+    }
+  }, [router]);
 
   // 🔹 Fetch API (search + pagination)
   useEffect(() => {

@@ -7,6 +7,7 @@ import { ShoppingOutlined, AppstoreOutlined, InboxOutlined, DollarOutlined } fro
 import AreaChart from "./AreaChart";
 import StockChart from "./StockChart";
 import MainLayout from "../layout/MainLayout";
+import { useRouter } from "next/navigation";
 
 type Product = {
   id: number;
@@ -19,6 +20,15 @@ type Product = {
 export default function Dashboard() {
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+
+    if (!user) {
+      router.push('/login');
+    }
+  }, [router]);
 
   useEffect(() => {
     fetch("https://dummyjson.com/products?limit=100")
