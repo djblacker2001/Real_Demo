@@ -53,10 +53,10 @@ export default function ProductToolbar({
                     style={{ width: 180 }}
                     onChange={(value) => setSortBy(value)}
                     options={[
-                        { value: "default", label: "Mặc định" },
-                        { value: "price-asc", label: "Giá tăng dần" },
-                        { value: "price-desc", label: "Giá giảm dần" },
-                        { value: "rating", label: "Đánh giá cao nhất" },
+                        { value: "default", label: "Default" },
+                        { value: "price-asc", label: "Price-asc" },
+                        { value: "price-desc", label: "Price-desc" },
+                        { value: "rating", label: "Rating" },
                     ]}
                 />
 

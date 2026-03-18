@@ -33,7 +33,7 @@ export default function PriceFilter({ setPriceRange }: Props) {
   () =>
     debounce((value: [number, number]) => {
       setPriceRange(value);
-    }, 300),
+    }, 500),
   [setPriceRange]
 );
 

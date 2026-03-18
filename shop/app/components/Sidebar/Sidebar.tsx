@@ -58,8 +58,6 @@ const Sidebar: React.FC<Props> = ({ open, setOpen }) => {
             </Link>
           </li>
         </ul>
-
-        <button className="logout">Log out</button>
       </aside>
     </>
   );
