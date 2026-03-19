@@ -2,6 +2,7 @@ import { Button, Select } from "antd";
 import "./style.css";
 import { AppstoreOutlined, BarsOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 type Product = {
     id: number;
@@ -26,7 +27,7 @@ export default function ProductToolbar({
     viewMode,
     setViewMode
 }: Props) {
-
+    const { t } = useTranslation();
     const [categories, setCategories] = useState<string[]>([]);
     const [products, setProducts] = useState<Product[]>([]);
     useEffect(() => {
@@ -43,7 +44,7 @@ export default function ProductToolbar({
         <div className="product-toolbar">
 
             <div className="product-count">
-                {total} products
+                {total} {t("product.products")}
             </div>
 
             <div className="toolbar-right">

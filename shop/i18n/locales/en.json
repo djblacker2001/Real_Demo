@@ -10,6 +10,14 @@
   "product": {
     "price": "Price",
     "stock": "Stock",
-    "add_to_cart": "Add to Cart"
+    "add_to_cart": "Add to Cart",
+    "products": "products"
+  },
+  "filter": {
+    "discount": "Discount",
+    "instock": "In stock",
+    "discounting": "Discounting",
+    "rating": "Rating",
+    "ormore": "or more"
   }
 }

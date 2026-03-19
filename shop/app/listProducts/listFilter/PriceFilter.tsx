@@ -4,6 +4,7 @@
 import { Slider } from "antd";
 import { useState, useMemo } from "react";
 import "./filter.css";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   setPriceRange: (range: [number, number]) => void;
@@ -27,6 +28,7 @@ export default function PriceFilter({ setPriceRange }: Props) {
 
   // state tạm (UI)
   const [tempPrice, setTempPrice] = useState<[number, number]>([0, 2000]);
+  const { t, i18n } = useTranslation();
 
   // debounce
   const debouncedSetPrice = useMemo(
@@ -41,7 +43,7 @@ export default function PriceFilter({ setPriceRange }: Props) {
     <div className="filter-box">
 
       <div className="filter-title">
-        LỌC THEO GIÁ
+        {t("product.price")}
       </div>
 
       <Slider

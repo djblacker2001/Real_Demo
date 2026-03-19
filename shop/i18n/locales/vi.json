@@ -10,12 +10,38 @@
     "product": {
         "price": "Giá",
         "stock": "Tồn kho",
-        "add_to_cart": "Thêm vào giỏ"
+        "add_to_cart": "Thêm vào giỏ",
+        "products": "Sản phẩm"
     },
-    "category_list": {
+    "category_bar": {
+        "all": "Tất cả"
+    },
+    "categories_map": {
         "beauty": "Làm đẹp",
         "fragrances": "Nước hoa",
         "furniture": "Nội thất",
-        "groceries": "Thực phẩm"
+        "groceries": "Thực phẩm",
+        "home-decoration": "Trang trí nhà cửa",
+        "kitchen-accessories": "Dụng cụ nhà bếp",
+        "laptops": "Máy tính xách tay",
+        "mens-shirts": "Áo (Nam)",
+        "mens-shoes": "Giày (Nam)",
+        "mens-watches": "Đồng hồ (Nam)",
+        "mobile-accessories": "Phụ kiện di động",
+        "motorcycle": "Xe máy",
+        "skin-care": "Chăm sóc da",
+        "smartphones": "Điện thoại",
+        "sports-accessories": "Thể thao",
+        "sunglasses": "Kính râm",
+        "tablets": "Máy tính bảng",
+        "tops": "Đầm",
+        "vehicle": "Phương tiện"
+    },
+    "filter": {
+        "discount": "Giảm giá",
+        "instock": "Còn hàng",
+        "discounting": "Đang giảm giá",
+        "rating": "Đánh giá",
+        "ormore": "trở lên"
     }
 }
