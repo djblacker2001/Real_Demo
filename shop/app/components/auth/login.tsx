@@ -5,6 +5,8 @@ import { Form, Input, Button, message } from 'antd';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import './login.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -28,8 +30,10 @@ const LoginPage = () => {
     <Form
       onFinish={onFinish}
       layout="vertical"
-      style={{ maxWidth: 300, margin: '100px auto' }}
     >
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px' }}>
+        <FontAwesomeIcon icon={faCircleUser} size="5x" />
+      </div>
       <Form.Item
         label="Username"
         name="username"

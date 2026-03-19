@@ -16,6 +16,7 @@ import "@fontsource/barlow/900.css";
 import "@fontsource/barlow-condensed/700.css";
 import "@fontsource/barlow-condensed/900.css";
 import MainLayout from "./layout/MainLayout";
+import I18nProvider from "./components/I18nProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,7 +41,9 @@ export default function RootLayout({
   return (
     <html lang="vi">
       <body>
-        {children}
+        <I18nProvider>
+          {children}
+        </I18nProvider>
       </body>
     </html>
   );

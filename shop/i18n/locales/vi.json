@@ -1,0 +1,21 @@
+{
+    "header": {
+        "search_placeholder": "Tìm kiếm sản phẩm...",
+        "categories": "Danh mục",
+        "cart": "Giỏ hàng",
+        "admin": "Quản trị",
+        "logout": "Đăng xuất",
+        "guest": "Khách"
+    },
+    "product": {
+        "price": "Giá",
+        "stock": "Tồn kho",
+        "add_to_cart": "Thêm vào giỏ"
+    },
+    "category_list": {
+        "beauty": "Làm đẹp",
+        "fragrances": "Nước hoa",
+        "furniture": "Nội thất",
+        "groceries": "Thực phẩm"
+    }
+}

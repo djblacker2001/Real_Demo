@@ -1,0 +1,15 @@
+{
+  "header": {
+    "search_placeholder": "Search products...",
+    "categories": "Categories",
+    "cart": "Cart",
+    "admin": "Admin",
+    "logout": "Logout",
+    "guest": "Guest"
+  },
+  "product": {
+    "price": "Price",
+    "stock": "Stock",
+    "add_to_cart": "Add to Cart"
+  }
+}

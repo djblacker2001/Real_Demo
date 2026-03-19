@@ -7,9 +7,11 @@
 /* Canh giữa form */
 .ant-form {
   background: #ffffff;
-  padding: 24px;
+  padding: 40px;
   border-radius: 12px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  max-width: 400px;
+  margin: 100px auto;
 }
 
 /* Toàn màn hình + nền */
@@ -17,6 +19,10 @@ body {
   margin: 0;
   height: 200px;
   background: linear-gradient(135deg, #4f46e5, #22c55e);
+}
+
+.iconuser {
+  width: 100px;
 }
 
 /* Label */
@@ -62,4 +68,10 @@ body {
   font-size: 12px;
   margin-bottom: 12px;
   
+}
+
+@media (max-width: 768px)  {
+  .ant-form{
+    max-width: 300;
+  }
 }

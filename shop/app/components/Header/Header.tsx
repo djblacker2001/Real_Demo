@@ -1,10 +1,12 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
-import { faUser, faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Header.css";
-import { GlobalOutlined, DownOutlined, BellOutlined, AppstoreAddOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
-import { MenuProps, Dropdown, Space, Button, Badge, Input, Row, Col, Avatar } from "antd";
+import { GlobalOutlined, DownOutlined, BellOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import { MenuProps, Dropdown, Space, Badge, Avatar } from "antd";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Search from "antd/es/input/Search";
@@ -16,32 +18,50 @@ type Props = {
     onCategoryChange: (value: string) => void;
 };
 
-type Category = {
-    slug: string;
-    name: string;
-    url: string;
-};
-
 const Header: React.FC<Props> = ({ onToggleSidebar }) => {
     const router = useRouter();
     const [username, setUsername] = useState<string>('');
-    const [language, setLanguage] = useState("English");
-    const [categories, setCategories] = useState<Category[]>([]);
-    const { i18n } = useTranslation();
+    const { t, i18n } = useTranslation();
 
-    const toggleLanguage = (lng: 'vi' | 'en') => {
+    // 1. Hàm đổi ngôn ngữ tập trung
+    const changeLanguage = (lng: string) => {
         i18n.changeLanguage(lng);
     };
 
-    useEffect(() => {
-        fetch("https://dummyjson.com/products/categories")
+    // 2. Cấu hình Menu Ngôn ngữ (Sử dụng MenuProps của Ant Design)
+    const languageItems: MenuProps['items'] = [
+        {
+            key: 'en',
+            label: 'English',
+            disabled: i18n.language === 'en', // Vô hiệu hóa nếu đang chọn
+            onClick: () => changeLanguage('en'),
+        },
+        {
+            key: 'vi',
+            label: 'Tiếng Việt',
+            disabled: i18n.language === 'vi',
+            onClick: () => changeLanguage('vi'),
+        },
+    ];
 
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-                setCategories(data);
-            });
-    }, []);
+    // 3. Cấu hình Menu User (Sử dụng t() để dịch nhãn)
+    const userItems: MenuProps['items'] = [
+        {
+            key: 'username',
+            label: <strong>{username || 'Guest'}</strong>,
+            disabled: true,
+        },
+        { type: 'divider' },
+        {
+            key: 'logout',
+            label: t('header.logout') || 'Log out', // Sử dụng i18n
+            icon: <LogoutOutlined />,
+            onClick: () => {
+                localStorage.removeItem('user');
+                router.push('/login');
+            },
+        },
+    ];
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
@@ -51,56 +71,6 @@ const Header: React.FC<Props> = ({ onToggleSidebar }) => {
         }
     }, []);
 
-    const handleLogout = () => {
-        localStorage.removeItem('user');
-        router.push('/login');
-    };
-
-    const items: MenuProps['items'] = [
-        {
-            key: 'username',
-            label: <strong>{username}</strong>,
-            disabled: true,
-        },
-        {
-            type: 'divider',
-        },
-        {
-            key: 'logout',
-            label: 'Đăng xuất',
-            icon: <LogoutOutlined />,
-            onClick: handleLogout,
-        },
-    ];
-
-    const item = [
-        {
-            key: "en",
-            label: (
-                <span
-                    onClick={() => {
-                        setLanguage("English");
-                    }}
-                    className={i18n.language === 'en' ? 'font-bold' : ''}
-                >
-                    English
-                </span>
-            ),
-        },
-        {
-            key: "vi",
-            label: (
-                <span
-                    onClick={() => {
-                        setLanguage("Tiếng Việt");
-                    }}
-                    className={i18n.language === 'vi' ? 'font-bold' : ''}
-                >
-                    Tiếng Việt
-                </span>
-            ),
-        },
-    ];
     return (
         <header className="header">
             <div className="left">
@@ -109,7 +79,7 @@ const Header: React.FC<Props> = ({ onToggleSidebar }) => {
                 </button>
                 <a className="logo" href="/">Shop<span>Now</span></a>
                 <Search
-                    placeholder="Search products..."
+                    placeholder={t("header.search_placeholder")}
                     className="search"
                     onSearch={(value) => { router.push(`/listProducts?search=${value}`); }}
                 />
@@ -119,20 +89,25 @@ const Header: React.FC<Props> = ({ onToggleSidebar }) => {
                 <Badge count={3} className="notifications">
                     <BellOutlined />
                 </Badge>
-                <Dropdown menu={{ items: item }} placement="bottomRight">
+
+                {/* Dropdown Ngôn ngữ */}
+                <Dropdown menu={{ items: languageItems }} placement="bottomRight">
                     <a onClick={(e) => e.preventDefault()} className="languages">
                         <Space>
                             <GlobalOutlined />
-                            {language}
+                            {/* Hiển thị text dựa trên i18n.language */}
+                            {i18n.language === 'vi' ? 'Tiếng Việt' : 'English'}
                             <DownOutlined />
                         </Space>
                     </a>
                 </Dropdown>
-                <Dropdown menu={{ items: items }} placement="bottomRight">
+
+                {/* Dropdown User */}
+                <Dropdown menu={{ items: userItems }} placement="bottomRight">
                     <Space style={{ cursor: 'pointer' }}>
                         <Avatar icon={<UserOutlined />} />
                         <span style={{ fontWeight: 500 }}>
-                            {username || 'Guest'}
+                            {username || t("header.guest")}
                         </span>
                     </Space>
                 </Dropdown>
