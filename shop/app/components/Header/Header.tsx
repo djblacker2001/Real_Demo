@@ -8,6 +8,7 @@ import { MenuProps, Dropdown, Space, Button, Badge, Input, Row, Col, Avatar } fr
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Search from "antd/es/input/Search";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     onToggleSidebar: () => void;
@@ -26,6 +27,11 @@ const Header: React.FC<Props> = ({ onToggleSidebar }) => {
     const [username, setUsername] = useState<string>('');
     const [language, setLanguage] = useState("English");
     const [categories, setCategories] = useState<Category[]>([]);
+    const { i18n } = useTranslation();
+
+    const toggleLanguage = (lng: 'vi' | 'en') => {
+        i18n.changeLanguage(lng);
+    };
 
     useEffect(() => {
         fetch("https://dummyjson.com/products/categories")
@@ -35,8 +41,6 @@ const Header: React.FC<Props> = ({ onToggleSidebar }) => {
                 console.log(data);
                 setCategories(data);
             });
-            
-            
     }, []);
 
     useEffect(() => {
@@ -77,6 +81,7 @@ const Header: React.FC<Props> = ({ onToggleSidebar }) => {
                     onClick={() => {
                         setLanguage("English");
                     }}
+                    className={i18n.language === 'en' ? 'font-bold' : ''}
                 >
                     English
                 </span>
@@ -89,6 +94,7 @@ const Header: React.FC<Props> = ({ onToggleSidebar }) => {
                     onClick={() => {
                         setLanguage("Tiếng Việt");
                     }}
+                    className={i18n.language === 'vi' ? 'font-bold' : ''}
                 >
                     Tiếng Việt
                 </span>
