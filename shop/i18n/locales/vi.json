@@ -11,7 +11,9 @@
         "price": "Giá",
         "stock": "Tồn kho",
         "add_to_cart": "Thêm vào giỏ",
-        "products": "Sản phẩm"
+        "products": "Sản phẩm",
+        "brand": "Thương hiệu",
+        "availabilityStatus": "Còn hàng"
     },
     "category_bar": {
         "all": "Tất cả"

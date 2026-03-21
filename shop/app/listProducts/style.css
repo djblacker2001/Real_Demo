@@ -48,6 +48,7 @@
   align-items: center;
   background: #fafafa;
   padding: 15px;
+  background-color: #d6d6d6;
 }
 
 .product-image {
@@ -56,6 +57,7 @@
   object-fit: contain;
   display: block;
   margin: auto;
+  
   /* đảm bảo nằm giữa */
 }
 

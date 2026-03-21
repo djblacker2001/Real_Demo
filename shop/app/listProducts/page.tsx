@@ -13,6 +13,7 @@ import RatingFilter from "./listFilter/RatingFilter";
 import ProductToolbar from "./ProductToolbar";
 import StickyBox from "react-sticky-box";
 import MainLayout from "../layout/MainLayout";
+import { useTranslation } from "react-i18next";
 
 const { Search } = Input;
 const { Meta } = Card;
@@ -40,6 +41,7 @@ type Product = {
 };
 
 export default function ProductList() {
+  const { t } = useTranslation();
   const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
   const [total, setTotal] = useState(0);
@@ -179,15 +181,15 @@ export default function ProductList() {
                 >
                   <div className="product-details">
                     <h3>{item.title}</h3>
-                    <p><b>Brand:</b> {item.brand}</p>
-                    <p><b>Stock:</b> {item.stock}</p>
+                    <p><b>{t("product.brand")}:</b> {item.brand}</p>
+                    <p><b>{t("product.stock")}:</b> {item.stock}</p>
                     <p className="price">
                       <span className="old-price">${item.price}</span>
                       <span className="new-price">
                         ${(item.price * (1 - item.discountPercentage / 100)).toFixed(2)}
                       </span>
                     </p>
-                    <Tag color="green">{item.availabilityStatus}</Tag>
+                    <Tag color="green">{t("product.availabilityStatus")}</Tag>
                     <p className="small-inform">
                       <span className="warranty"><FontAwesomeIcon icon={faShieldHalved} /> {item.warrantyInformation}</span>
                       <span className="shipping"><TruckOutlined /> {item.shippingInformation}</span>

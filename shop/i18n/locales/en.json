@@ -7,11 +7,17 @@
     "logout": "Logout",
     "guest": "Guest"
   },
+  "category_bar": {
+    "all": "All"
+  },
   "product": {
     "price": "Price",
     "stock": "Stock",
     "add_to_cart": "Add to Cart",
-    "products": "products"
+    "products": "products",
+    "brand": "Brand",
+    "availabilityStatus": "In stock "
+
   },
   "filter": {
     "discount": "Discount",
