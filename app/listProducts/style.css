@@ -4,7 +4,9 @@
   padding: 20px;
 }
 
-
+.product-count {
+  color: black;
+}
 
 .product-main {
   align-items: flex-start;

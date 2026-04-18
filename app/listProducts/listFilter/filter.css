@@ -1,5 +1,6 @@
 /* Chung */
 .filter-box{
+  color: black;
   background:white;
   padding:20px;
   border-radius:10px;
@@ -7,6 +8,7 @@
 }
 
 .filter-title{
+  color: black;
   font-weight:600;
   margin-bottom:15px;
   border-bottom:2px solid #ff4d4f;
@@ -15,6 +17,7 @@
 
 /* PriceFilter */
 .price-range{
+  color: black;
   display:flex;
   justify-content:space-between;
   font-size:13px;
